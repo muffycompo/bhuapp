@@ -1,0 +1,337 @@
+<?php
+class Users_Controller extends Base_Controller{
+	public $restful = true;
+
+	public function post_login(){
+		$validate = User::user_validation(Input::all());
+		if($validate === true){
+			$login = User::login_user(Input::all());
+			if($login !== false){
+				Session::put('credentials',$login);
+				return Redirect::to_route('dashboard');
+			} else {
+				return Redirect::to_route('home')->with('message','The Username/Password combination is invalid!')->with_input();
+			}
+		} else {
+			return Redirect::to_route('home')->with_errors($validate)->with_input();
+		}
+	}
+
+	public function post_signup(){
+		$validate = User::signup_validation(Input::all());
+		if($validate === true){
+			$signup = User::new_user(Input::all());
+			if($signup !== false){
+				return Redirect::to_route('signup_success')->with('message', $signup);
+			} else {
+				return Redirect::to_route('signup')->with('message','An error has occured, please try again!')->with_input();
+			}
+			
+		} else {
+			return Redirect::to_route('signup')->with_errors($validate)->with_input();
+		}
+	}
+
+	public function get_signup(){
+		return View::make('users.signup');
+	}
+
+	public function get_signup_success(){
+		$message = Session::get('message');
+		return View::make('users.signup_success')->with('user_details', $message);
+	}
+
+	public function get_password_recovery(){
+		return View::make('users.password_recovery');
+	}
+
+	public function get_dashboard(){
+		return View::make('users.dashboard');
+	}
+
+	public function get_forms(){
+		return View::make('users.forms');
+	}
+
+	public function get_biodata(){
+		$user_data = Biodata::biodata_list();
+		return View::make('users.biodata')->with('biodata',$user_data);
+	}
+
+	public function post_biodata(){
+		$validate = Biodata::biodata_validation(Input::all());
+		if($validate === true){
+			if(Biodata::update_biodata(Input::all())){
+				return Redirect::to_route('forms')->with('message','Personal Information has been saved!');
+			} else {
+				return Redirect::to_route('forms')->with('message','An error has occured, please try again!');
+			}
+		} else {
+			return Redirect::to_route('biodata')->with_errors($validate)->with_input();
+		}
+	}
+
+	public function get_education(){
+		$education = Education::education_list();
+		$institution = Institution::institution_list();
+		$examination = Examination::examination_list();
+		return View::make('users.education')
+				->with('institution_data', $institution)
+				->with('education_data', $education)
+				->with('examination_data', $examination);
+	}
+
+	public function post_education(){
+		$validate = Education::education_validation(Input::all());
+		if($validate === true){
+			$education = Education::create_education(Input::all());
+			if($education === true){
+				return Redirect::to_route('forms')
+					->with('message','Educational Information has been saved!');
+			} elseif($education == 1) {
+				return Redirect::to_route('education')
+					->with('message','No Result has been added yet!')->with_input();
+			} elseif($education == 2) {
+				return Redirect::to_route('education')
+					->with('message','No Institution has been added yet!')->with_input();
+			} else {
+				return Redirect::to_route('education')
+					->with('message','An error has occured, please try again!')->with_input();
+			}
+		} else {
+			return Redirect::to_route('education')->with_errors($validate)->with_input();
+		}
+	}
+
+	public function get_parents(){
+		$user_data = Parents::parent_list();
+		return View::make('users.parents')->with('parent',$user_data);
+	}
+
+	public function post_parents(){
+		$validate = Parents::parent_validation(Input::all());
+		if($validate === true){
+			if(Parents::create_parent(Input::all())){
+				return Redirect::to_route('forms')
+					->with('message','Parent/Guardian Information has been saved!');
+			} else {
+				return Redirect::to_route('parents')
+					->with('message','An error has occured, please try again!')->with_input();
+			}
+		} else {
+			return Redirect::to_route('parents')->with_errors($validate)->with_input();
+		}
+	}
+
+	public function get_upload(){
+		return View::make('users.upload');
+	}
+
+	public function post_upload(){
+		$upload_id = Input::get('upload_id');
+		switch ($upload_id) {
+			case '1':
+				$validate = User::upload_validation(Input::all());
+				break;
+			default:
+				$validate = User::uploaded_validation(Input::all());
+				break;
+		}
+		if($validate === true){
+			$upload = User::uploads($upload_id, Input::all());
+			if($upload !== false){
+				return Redirect::to_route('upload')->with('message','The file has been uploaded!');
+			} else {
+				return Redirect::to_route('upload')->with('message','An error has occured, please try again!');
+			}
+		} else {
+			return Redirect::to_route('upload')->with_errors($validate)->with_input();
+		}
+	}
+
+	public function get_uploaded(){
+		return View::make('users.uploaded');
+	}
+
+	public function get_add_institution(){
+		$institution = Institution::institution_list();
+		return View::make('users.education_institution')->with('institution_data', $institution);
+	}
+
+	public function post_add_institution(){
+		$validate = Institution::institution_validation(Input::all());
+		if($validate === true){
+			if(Institution::create_institution(Input::all())){
+				return Redirect::to_route('add_institution')
+					->with('message','Institution has been added!')->with_input();
+			} else {
+				return Redirect::to_route('add_institution')
+					->with('message','You already have four(4) Institutions added!')->with_input();
+			}
+		} else {
+			return Redirect::to_route('add_institution')->with_errors($validate)->with_input(); 
+		}
+	}
+
+	public function get_add_result(){
+		$examination = Examination::examination_list();
+		return View::make('users.education_result')->with('examination_data', $examination);
+	}
+
+	public function post_add_result(){
+		$validate = Examination::examination_validation(Input::all());
+		if($validate === true){
+			if(Examination::create_examination(Input::all())){
+				return Redirect::to_route('add_result')
+					->with('message','Result has been added!')->with_input();
+			} else {
+				return Redirect::to_route('add_result')
+					->with('message','You already have eighteen(18) results added!')->with_input();
+			}
+		} else {
+			return Redirect::to_route('add_result')->with_errors($validate)->with_input();
+		}
+	}
+
+	public function get_edit_institution($id,$redirect_id){
+		$edit_institution = Institution::edit_institution($id);
+		switch ($redirect_id) {
+			case '1':
+				return View::make('users.education_edit_institution')
+				->with('redirect_id', $redirect_id)
+				->with('edit_data', $edit_institution);
+				break;
+			default:
+				return View::make('users.education_edit_institution_add')
+				->with('redirect_id', $redirect_id)
+				->with('edit_data', $edit_institution);
+				break;
+		}
+	}
+
+	public function post_edit_institution(){
+		$validate = Institution::institution_validation(Input::all());
+		$id = Input::get('id');
+		$redirect_id = Input::get('redirect_id');
+		if($validate === true){
+			if(Institution::update_institution(Input::all())){
+				switch ($redirect_id) {
+					case '1':
+						return Redirect::to_route('education')
+							->with('message','Institution has been updated!');
+						break;
+					default:
+						return Redirect::to_route('add_institution')
+							->with('message','Institution has been updated!');
+						break;
+				}
+			} else {
+				return Redirect::to_route('edit_institution',array($id,$redirect_id))
+					->with('message','An error has occured, please try again!')->with_input();
+			}
+		} else {
+			return Redirect::to_route('edit_institution',array($id,$redirect_id))->with_errors($validate)->with_input();
+		}
+	}
+
+	public function get_edit_result($id,$redirect_id){
+		$edit_result = Examination::edit_examination($id);
+		switch ($redirect_id) {
+			case '1':
+				return View::make('users.education_edit_result')
+				->with('edit_data', $edit_result);
+				break;
+			default:
+				return View::make('users.education_edit_result_add')
+				->with('edit_data', $edit_result);
+				break;
+		}
+	}
+
+	public function post_edit_result(){
+		$validate = Examination::examination_validation(Input::all());
+		$id = Input::get('id');
+		$redirect_id = Input::get('redirect_id');
+		if($validate === true){
+			if(Examination::update_examination(Input::all())){
+				switch ($redirect_id) {
+					case '1':
+						return Redirect::to_route('education')
+							->with('message','Result has been updated!');
+						break;
+					default:
+						return Redirect::to_route('add_result')
+							->with('message','Result has been updated!');
+						break;
+				}
+			} else {
+				return Redirect::to_route('edit_result',array($id,$redirect_id))
+					->with('message','An error has occured, please try again!')->with_input();
+			}
+		} else {
+			return Redirect::to_route('edit_result',array($id,$redirect_id))->with_errors($validate)->with_input();
+		}
+	}
+
+	public function get_delete_institution($id,$redirect_id){
+			if(Institution::delete_institution($id)){
+				switch ($redirect_id) {
+				case '1':
+					return Redirect::to_route('education')
+					->with('message','Institution deleted successfully!');
+					break;
+				default:
+					return Redirect::to_route('add_institution')
+					->with('message','Institution deleted successfully!');
+					break;
+			}
+		} else {
+			switch ($redirect_id) {
+				case '1':
+					return Redirect::to_route('education')
+					->with('message','An error has occured, please try again!');
+					break;
+				default:
+					return Redirect::to_route('add_institution')
+					->with('message','An error has occured, please try again!');
+					break;
+			}
+		}
+	}
+
+	public function get_delete_result($id,$redirect_id){
+		if(Examination::delete_examination($id)){
+			switch ($redirect_id) {
+				case '1':
+					return Redirect::to_route('education')
+					->with('message','Result deleted successfully!');
+					break;
+				default:
+					return Redirect::to_route('add_result')
+					->with('message','Result deleted successfully!');
+					break;
+			}
+		} else {
+			switch ($redirect_id) {
+				case '1':
+					return Redirect::to_route('education')
+					->with('message','An error has occured, please try again!');
+					break;
+				default:
+					return Redirect::to_route('add_result')
+					->with('message','An error has occured, please try again!');
+					break;
+			}
+		}
+	}
+
+	public function get_password_change(){
+		return View::make('users.password_change');
+	}
+
+	public function get_logout(){
+		Auth::logout();
+		Session::flush();
+		return Redirect::to_route('home');
+	}
+}
