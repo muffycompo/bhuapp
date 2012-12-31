@@ -68,6 +68,10 @@ return array(
 	"url"            => "The :attribute format is invalid.",
 	"pin"            => "The :attribute is invalid or may have already been activated.",
 	"arrayfull"      => "The :attribute contains empty values",
+	"current_password"      => "The current password is incorrect.",
+	"valid_username"      => "This :attribute does not exist.",
+	"exam_number"      => "The examination number is not a valid JAMB, WAEC, NECO or NABTEB number",
+	"gsm_number"      => "The GSM number is invalid.",
 
 	/*
 	|--------------------------------------------------------------------------

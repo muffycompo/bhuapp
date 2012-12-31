@@ -27,9 +27,7 @@
 		<!-- Sign Up Tab Content -->
 		<div id="signUp" class="clearfix">
 			@if(Session::has('message'))
-				<div class="errorFeedback">
-					<p>{{ Session::get('message') }}</p>
-				</div>
+				{{ Session::get('message') }}
 			@endif
 				
 			{{ Form::open('users/signup','POST', array('class'=>'cleanForm','id'=>'signUpForm')) }}

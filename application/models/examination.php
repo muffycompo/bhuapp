@@ -9,7 +9,7 @@ class Examination extends Basemodel{
 
 	public static $examination_rules = array(
 		'exam_date' => 'required',
-		'exam_number' => 'required'
+		'exam_number' => 'required|exam_number'
 	);
 
 	public static function examination_validation($input){

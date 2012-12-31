@@ -26,7 +26,12 @@ class Education extends Basemodel{
 				'jamb_score' => $data['jamb_score']
 			);
 			$education = DB::table('education')->where('user_id','=',$user_id)->update($update_data);
-			if($education){return true;} else { return false;}
+			if($education){
+				Bhu::update_form_status(2);
+				return true;
+			} else { 
+				return 3;
+			}
 		} else {
 			if(self::check_institutions_exists($user_id)){
 				if(self::check_exams_exists($user_id)){
@@ -38,8 +43,13 @@ class Education extends Basemodel{
 						'jamb_number' => $data['jamb_number'],
 						'jamb_score' => $data['jamb_score']
 					);
-					self::create($insert_data);
-					return true;
+					$education_create = self::create($insert_data);
+					if($education_create){
+						Bhu::update_form_status(2);
+						return true;
+					} else {
+						return false;
+					}
 				} else {
 					return 1;
 				}

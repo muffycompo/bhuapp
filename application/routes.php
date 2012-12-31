@@ -35,7 +35,7 @@
 // GET Routes
 Route::get('/', array('as'=>'home','uses'=>'home@index'));
 Route::get('/users/signup', array('as'=>'signup','uses'=>'users@signup'));
-Route::get('/users/password_recovery', array('as'=>'recovery','uses'=>'users@password_recovery'));
+Route::get('/users/password_reset', array('as'=>'recovery','uses'=>'users@password_reset'));
 Route::get('/users/password_change', array('as'=>'password_change','uses'=>'users@password_change'));
 Route::get('/users/signup_success', array('as'=>'signup_success','uses'=>'users@signup_success'));
 Route::get('/users/logout', array('as'=>'logout','uses'=>'users@logout'));
@@ -46,6 +46,7 @@ Route::get('/users/education', array('as'=>'education','uses'=>'users@education'
 Route::get('/users/parents', array('as'=>'parents','uses'=>'users@parents'));
 Route::get('/users/upload', array('as'=>'upload','uses'=>'users@upload'));
 Route::get('/users/uploaded', array('as'=>'uploaded','uses'=>'users@uploaded'));
+Route::get('/users/delete_doc/(:any)', array('as'=>'delete_doc','uses'=>'users@delete_doc'));
 Route::get('/users/add_institution', array('as'=>'add_institution','uses'=>'users@add_institution'));
 Route::get('/users/add_result', array('as'=>'add_result','uses'=>'users@add_result'));
 Route::get('/users/edit_institution/(:num)/(:num)', array('as'=>'edit_institution','uses'=>'users@edit_institution'));
@@ -65,6 +66,8 @@ Route::post('/users/edit_result', array('uses'=>'users@edit_result'));
 Route::post('/users/parents', array('uses'=>'users@parents'));
 Route::post('/users/upload', array('uses'=>'users@upload'));
 Route::post('/users/uploaded', array('uses'=>'users@uploaded'));
+Route::post('/users/password_change', array('uses'=>'users@password_change'));
+Route::post('/users/password_reset', array('uses'=>'users@password_reset'));
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

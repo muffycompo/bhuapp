@@ -37,9 +37,7 @@
             <div class="dash-sep"><!--  --></div>
             <h2><!-- --></h2>
             @if(Session::has('message'))
-                <div class="successFeedback">
-                    <p>{{ Session::get('message') }}</p>
-                </div>
+                {{ Session::get('message') }}
             @endif
             @if($errors->has())
                 <div class="errorFeedback">

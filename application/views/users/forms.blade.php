@@ -37,25 +37,22 @@
 			<div class="dash-sep"><!--  --></div>
 			<h2><!-- --></h2>
 			@if(Session::has('message'))
-				<div class="errorFeedback">
-					<p>{{ Session::get('message') }}</p>
-				</div>
+				{{ Session::get('message') }}
 			@endif
 
 			<div id="downloadable-forms" class="half_grid">
-				<h2 class="form">Form Sections</h2>
+				<h2 class="form">Forms Section</h2>
 				<ul id="form-sections">
-					<li><strong>A </strong>{{ HTML::link_to_route('biodata','Personal Information') }} <span class="reg-forms-complete">&nbsp;</span></li>
-					<li><strong>B </strong>{{ HTML::link_to_route('education','Educational Information') }} <span class="reg-forms-not-complete">&nbsp;</span></li>
-					<li><strong>C </strong>{{ HTML::link_to_route('parents','Parent / Guardian / Sponsor\'s Information') }} <span class="reg-forms-complete">&nbsp;</span></li>
+					<li><strong>A </strong>{{ HTML::link_to_route('biodata','Personal Information') }} {{ (Bhu::form_completion() >= 1)? '<span class="reg-forms-complete">&nbsp;</span>' : ''}}</li>
+					<li><strong>B </strong>{{ HTML::link_to_route('education','Educational Information') }} {{ (Bhu::form_completion() >= 2)? '<span class="reg-forms-complete">&nbsp;</span>' : ''}}</li>
+					<li><strong>C </strong>{{ HTML::link_to_route('parents','Parent / Guardian / Sponsor\'s Information') }} {{ (Bhu::form_completion() >= 3)? '<span class="reg-forms-complete">&nbsp;</span>' : ''}}</li>
 				</ul>
 
 			</div><!-- end downloadable-forms -->
 
 		<div id="settings" class="half_grid">
 			<h2 class="status">Registration Status</h2>
-			<span class="completed">Complete</span>
-			<span class="not-completed">Incomplete</span>
+			@include('users.partials.user_registration_status')
 
 			<div class="dash-sep-inner"><!--  --></div>
 			<h2 class="upload">Uploads</h2>

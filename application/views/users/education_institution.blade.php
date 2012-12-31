@@ -40,9 +40,7 @@
 			<p>Institutions Attended</p>
 		</div>
 		@if(Session::has('message'))
-			<div class="errorFeedback">
-				<p>{{ Session::get('message') }}</p>
-			</div>
+			{{ Session::get('message') }}
 		@endif
 <!-- Sign Up Tab Content -->
 <div id="signUp-dash" class="clearfix">

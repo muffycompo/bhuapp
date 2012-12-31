@@ -10,4 +10,12 @@ class Basemodel extends Eloquent{
 		}
 	}
 
+	public static function message_response($type, $message){
+		$response = '<div class="' . strtolower($type) . 'Feedback">
+			<p>' . $message . '</p>
+		</div>';
+
+		return $response;
+	}
+
 }

@@ -36,43 +36,41 @@
 
         <div id="signIn">
 
-            @if(Session::has('message'))
-				<div class="errorFeedback">
-					<p>{{ Session::get('message') }}</p>
-				</div>
-			@endif
+	            @if(Session::has('message'))
+					{{ Session::get('message') }}
+				@endif
 
-            <form action="#" method="POST" class="cleanForm">
+            	{{ Form::open('users/password_change','POST',array('class'=>'cleanForm')) }}
 
                 <fieldset>
 
                     <p>
-                        <label for="current_password">Current Password:</label>
-                        <input type="password" id="current_password" name="current_password" class="inputStyle" />
-                        <!-- <em>Enter your username.</em> -->
+                        {{ Form::label('current_password','Current Password:') }}
+                        {{ Form::mpassword('current_password', Input::old('current_password'), array('class'=>'inputStyle')) }}
+                        {{ $errors->first('current_password','<em class="emsg">:message</em>') }}
                     </p>
 
                     <p>
-                        <label for="new_password">New Password:</label>
-                        <input type="password" id="new_password" name="new_password" class="inputStyle" />
-                        <!-- <em>Enter your password.</em> -->
+                        {{ Form::label('password','New Password:') }}
+                        {{ Form::mpassword('password', Input::old('password'), array('class'=>'inputStyle')) }}
+                        {{ $errors->first('password','<em class="emsg">:message</em>') }}
                     </p>
 
                     <p>
-                        <label for="re_password">Re-Password:</label>
-                        <input type="password" id="re_password" name="re_password" class="inputStyle" />
-                        <!-- <em>Enter your password.</em> -->
+                        {{ Form::label('password_confirmation','Confirm Password:') }}
+                        {{ Form::mpassword('password_confirmation', Input::old('password_confirmation'), array('class'=>'inputStyle')) }}
+                        {{ $errors->first('password_confirmation','<em class="emsg">:message</em>') }}
                     </p>
 
-                    <input type="submit" value="Save" class="inputStyleBtn" />
+                    {{ Form::submit('Save',array('name'=>'submit','class'=>'inputStyleBtn')) }}&nbsp;&nbsp;&nbsp;&nbsp;{{ HTML::link('users/dashboard','Cancel',array('class'=>'inputStyleBtn')) }}
 
                     <div class="formExtra">
-                        <p><a href="/users/dashboard">Back to Dashboard</a></p>
+                        <p>{{ HTML::link_to_route('dashboard','Back to Dashboard') }}</p>
                     </div>
 
                 </fieldset>
 
-            </form>
+            {{ Form::close() }}
 
         </div> <!-- end signIn -->
 

@@ -39,8 +39,8 @@
 		<div class="formHeading">
 			<p>Edit Examinations Passed</p>
 		</div>
-<!-- Sign Up Tab Content -->
-<div id="signUp-dash" class="clearfix">
+		<!-- Sign Up Tab Content -->
+		<div id="signUp-dash" class="clearfix">
 
 		{{ Form::open('users/edit_result','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
 	
@@ -61,7 +61,7 @@
 					<tr>
 						<td>{{ Bhu::exam_type_dropdown('exam_type',$edit_data->exam_type_id,array('class'=>'selectInputExam')) }}</td>
 						<td>{{ Form::text('exam_date',$edit_data->exam_date,array('maxlength'=>'4','class'=>'smallInput')) }}</td>
-						<td>{{ Form::text('exam_number',$edit_data->exam_number,array('class'=>'longInputExamNo')) }}</td>
+						<td>{{ Form::text('exam_number',$edit_data->exam_number,array('class'=>'longInputExamNo','maxlength'=>'10')) }}</td>
 						<td>{{ Bhu::exam_subject_dropdown('exam_subject',$edit_data->exam_subject_id,array('class'=>'selectInputSubject')) }}</td>
 						<td colspan="2">{{ Bhu::exam_grade_dropdown('exam_grade',$edit_data->exam_grade_id,array('class'=>'selectInputGrade')) }}</td>
 					</tr>

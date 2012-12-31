@@ -23,25 +23,29 @@ class User extends Basemodel{
 
 	public static $login_rules = array(
 		'username' => 'required|min:3|max:20',
-		'password' => 'required|between:6,10'
+		'password' => 'required'
 	);
 
 	public static $signup_rules = array(
 		'surname' => 'required',
 		'first_name' => 'required',
 		'email' => 'required|email',
-		'phone' => 'required|numeric',
+		'phone' => 'required|numeric|gsm_number',
 		'pin_number' => 'required|numeric|pin',
 		'teller' => 'required'
 	);
 
-	public static $upload_rules = array(
-		'upload_passport' => 'required|image|mimes:jpg,png,jpeg,gif'
+	public static $upload_rules = array('upload_passport' => 'required|image|mimes:jpg,png,jpeg,gif');
+
+	public static $uploaded_rules = array('upload_docs' => 'required|mimes:jpg,png,jpeg,gif,pdf,doc,docx');
+
+	public static $password_rules = array(
+		'current_password' => 'required|current_password',
+		'password' => 'required|confirmed',
+		'password_confirmation' => 'required'
 	);
 
-	public static $uploaded_rules = array(
-		'upload_docs' => 'required|mimes:jpg,png,jpeg,gif,pdf,doc,docx'
-	);
+	public static $password_reset_rules = array('username' => 'required|valid_username');
 
 	public static function user_validation($input){
 		return static::validation($input, static::$login_rules);
@@ -57,6 +61,14 @@ class User extends Basemodel{
 
 	public static function uploaded_validation($input){
 		return static::validation($input, static::$uploaded_rules);
+	}
+
+	public static function password_validation($input){
+		return static::validation($input, static::$password_rules);
+	}
+
+	public static function password_reset_validation($input){
+		return static::validation($input, static::$password_reset_rules);
 	}
 
 	public static function signup_user($data){
@@ -80,11 +92,11 @@ class User extends Basemodel{
 			$session_array = array(
 				'user_id' => $user_auth->id,
 				'username' => $user_auth->username,
-				'firstname' => $user_biodata->firstname,
-				'surname' => $user_biodata->surname,
-				'othernames' => $user_biodata->othernames,
 				'formno' => $user_biodata->formno
 			);
+			Session::put('firstname', $user_biodata->firstname);
+			Session::put('surname', $user_biodata->surname);
+			Session::put('othernames', $user_biodata->othernames);
 			return $session_array;
 		} else {
 			return false;
@@ -117,33 +129,58 @@ class User extends Basemodel{
 			);
 			//Update PIN Information
 			Pin::update_pin($data['pin_number'], $pin_data);
-
-			$ret = array('username'=>$user['username'],'password'=>$pass,'email'=>$biodata['email_address'],'gsm_no'=>$biodata['gsm_no']);
-			return $ret;
+			// Create Forms completion status
+			DB::table('statuses')->insert(array('user_id' => $new_user->id));
+			$return_credentials = array('username'=>$user['username'],'password'=>$pass,'email'=>$biodata['email_address'],'gsm_no'=>$biodata['gsm_no']);
+			return $return_credentials;
 		} else {
 			return false;
 		}
 	}
 
 	public static function uploads($upload_id, $data){
+		return Bhu::upload_file($upload_id, $data);
+	}
+
+	public static function documents(){
 		$username = Session::get('credentials')['username'];
-		if($upload_id == 1){
-			$user_upload_dir = 'public/uploads/' . $username . '/passport';
-			$ext = explode('.', File::extension($data['upload_passport']['name']));
-			$upl = 'upload_passport';
-			$filename = $username. '.' .$ext[0];
-		} else {
-			$user_upload_dir = 'public/uploads/' . $username . '/documents';
-			$upl = 'upload_docs';
-			$filename = strtolower(str_replace(' ', '_', $data['upload_docs']['name']));
-		}
-		// Check if folder for user exist
-		if(!file_exists($user_upload_dir)){
-			mkdir($user_upload_dir,0777,true);
-		}
-		// upload file to folder
-		$upload = Input::upload($upl, $user_upload_dir, $filename);
-		return $upload;
+		$files = Bhu::document_list($username);
+		foreach($files as $k => $v){
+            $file[] = $v;
+        }
+        return $file;
+	}
+
+	public static function documents_path(){
+		$username = Session::get('credentials')['username'];
+		return Bhu::docs_path($username);
+	}
+
+	public static function remove_document($document){
+		$username = Session::get('credentials')['username'];
+		return Bhu::remove_docs($username, $document);
+	}
+
+	public static function change_current_password($data){
+		$user_id = Session::get('credentials')['user_id'];
+		$password = DB::table('users')->where('id', '=', $user_id)->update(array('password' => Hash::make($data['password'])));
+		if($password){ return true;} else {return false;}
+	}
+
+	public static function reset_password($data){
+		$id = DB::table('users')->where('username', '=', $data['username'])->first()->id;
+		$user = DB::table('biodata')->where('user_id','=',$id)->first();
+		$password = Bhu::password_gen();
+		// Send Email and SMS
+		$tmp = array(
+			'email' => $user->email_address,
+			'gsm_no' => $user->gsm_no,
+			'password' => $password
+		);
+		// Update User Password
+		$update_user = DB::table('users')->where('id', '=', $id)->update(array('password' => Hash::make($password)));
+		if($update_user){ return $tmp;} else { return false;}
+
 	}
 
 }

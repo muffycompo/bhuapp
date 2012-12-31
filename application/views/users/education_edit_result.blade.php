@@ -39,8 +39,8 @@
 		<div class="formHeading">
 			<p>Edit Examinations Passed</p>
 		</div>
-<!-- Sign Up Tab Content -->
-<div id="signUp-dash" class="clearfix">
+	<!-- Sign Up Tab Content -->
+	<div id="signUp-dash" class="clearfix">
 
 		{{ Form::open('users/edit_result','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
 	

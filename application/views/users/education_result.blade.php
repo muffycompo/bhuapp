@@ -40,9 +40,7 @@
 			<p>Examinations Passed</p>
 		</div>
 		@if(Session::has('message'))
-			<div class="errorFeedback">
-				<p>{{ Session::get('message') }}</p>
-			</div>
+			{{ Session::get('message') }}
 		@endif
 <!-- Sign Up Tab Content -->
 <div id="signUp-dash" class="clearfix">
@@ -67,7 +65,7 @@
 					<tr>
 						<td>{{ Bhu::exam_type_dropdown('exam_type',Input::old('exam_type'),array('class'=>'selectInputExam')) }}</td>
 						<td>{{ Form::text('exam_date',Input::old('exam_date'),array('maxlength'=>'4','class'=>'smallInput')) }}</td>
-						<td>{{ Form::text('exam_number',Input::old('exam_number'),array('class'=>'longInputExamNo')) }}</td>
+						<td>{{ Form::text('exam_number',Input::old('exam_number'),array('class'=>'longInputExamNo', 'maxlength'=>'10')) }}</td>
 						<td>{{ Bhu::exam_subject_dropdown('exam_subject',Input::old('exam_subject'),array('class'=>'selectInputSubject')) }}</td>
 						<td colspan="2">{{ Bhu::exam_grade_dropdown('exam_grade',Input::old('exam_grade'),array('class'=>'selectInputGrade')) }}</td>
 					</tr>

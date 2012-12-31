@@ -10,7 +10,7 @@ class Users_Controller extends Base_Controller{
 				Session::put('credentials',$login);
 				return Redirect::to_route('dashboard');
 			} else {
-				return Redirect::to_route('home')->with('message','The Username/Password combination is invalid!')->with_input();
+				return Redirect::to_route('home')->with('message', User::message_response('error', 'The Username/Password combination is invalid!'))->with_input();
 			}
 		} else {
 			return Redirect::to_route('home')->with_errors($validate)->with_input();
@@ -24,7 +24,7 @@ class Users_Controller extends Base_Controller{
 			if($signup !== false){
 				return Redirect::to_route('signup_success')->with('message', $signup);
 			} else {
-				return Redirect::to_route('signup')->with('message','An error has occured, please try again!')->with_input();
+				return Redirect::to_route('signup')->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
 			}
 			
 		} else {
@@ -41,8 +41,8 @@ class Users_Controller extends Base_Controller{
 		return View::make('users.signup_success')->with('user_details', $message);
 	}
 
-	public function get_password_recovery(){
-		return View::make('users.password_recovery');
+	public function get_password_reset(){
+		return View::make('users.password_reset');
 	}
 
 	public function get_dashboard(){
@@ -62,9 +62,9 @@ class Users_Controller extends Base_Controller{
 		$validate = Biodata::biodata_validation(Input::all());
 		if($validate === true){
 			if(Biodata::update_biodata(Input::all())){
-				return Redirect::to_route('forms')->with('message','Personal Information has been saved!');
+				return Redirect::to_route('forms')->with('message', User::message_response('success', 'Personal Information has been saved!'));
 			} else {
-				return Redirect::to_route('forms')->with('message','An error has occured, please try again!');
+				return Redirect::to_route('forms')->with('message', User::message_response('error', 'An error has occured, please try again!'));
 			}
 		} else {
 			return Redirect::to_route('biodata')->with_errors($validate)->with_input();
@@ -87,16 +87,19 @@ class Users_Controller extends Base_Controller{
 			$education = Education::create_education(Input::all());
 			if($education === true){
 				return Redirect::to_route('forms')
-					->with('message','Educational Information has been saved!');
+					->with('message', User::message_response('success', 'Educational Information has been saved!'));
 			} elseif($education == 1) {
 				return Redirect::to_route('education')
-					->with('message','No Result has been added yet!')->with_input();
+					->with('message', User::message_response('error', 'No Result has been added yet!'))->with_input();
 			} elseif($education == 2) {
 				return Redirect::to_route('education')
-					->with('message','No Institution has been added yet!')->with_input();
+					->with('message', User::message_response('error', 'No Institution has been added yet!'))->with_input();
+			} elseif($education == 3) {
+				return Redirect::to_route('forms')
+					->with('message', User::message_response('error', 'No changes saved even though Institution/Result may have been updated!'))->with_input();
 			} else {
 				return Redirect::to_route('education')
-					->with('message','An error has occured, please try again!')->with_input();
+					->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
 			}
 		} else {
 			return Redirect::to_route('education')->with_errors($validate)->with_input();
@@ -113,10 +116,10 @@ class Users_Controller extends Base_Controller{
 		if($validate === true){
 			if(Parents::create_parent(Input::all())){
 				return Redirect::to_route('forms')
-					->with('message','Parent/Guardian Information has been saved!');
+					->with('message', User::message_response('success', 'Parent/Guardian Information has been saved!'));
 			} else {
 				return Redirect::to_route('parents')
-					->with('message','An error has occured, please try again!')->with_input();
+					->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
 			}
 		} else {
 			return Redirect::to_route('parents')->with_errors($validate)->with_input();
@@ -140,9 +143,10 @@ class Users_Controller extends Base_Controller{
 		if($validate === true){
 			$upload = User::uploads($upload_id, Input::all());
 			if($upload !== false){
-				return Redirect::to_route('upload')->with('message','The file has been uploaded!');
+				Bhu::update_form_status(4);
+				return Redirect::to_route('upload')->with('message', User::message_response('success', 'The file has been uploaded!'));
 			} else {
-				return Redirect::to_route('upload')->with('message','An error has occured, please try again!');
+				return Redirect::to_route('upload')->with('message', User::message_response('error', 'An error has occured, please try again!'));
 			}
 		} else {
 			return Redirect::to_route('upload')->with_errors($validate)->with_input();
@@ -150,7 +154,17 @@ class Users_Controller extends Base_Controller{
 	}
 
 	public function get_uploaded(){
-		return View::make('users.uploaded');
+		$uploaded_docs = User::documents();
+		return View::make('users.uploaded')->with('documents', $uploaded_docs)
+			->with('documents_path', User::documents_path());
+	}
+
+	public function get_delete_doc($document){
+		if(User::remove_document($document)){
+			return Redirect::to_route('uploaded')->with('message', User::message_response('success', $document . ' has been deleted'));
+		} else {
+			return Redirect::to_route('uploaded')->with('message', User::message_response('error', 'An error occured while deleting ' . $document));
+		}
 	}
 
 	public function get_add_institution(){
@@ -163,10 +177,10 @@ class Users_Controller extends Base_Controller{
 		if($validate === true){
 			if(Institution::create_institution(Input::all())){
 				return Redirect::to_route('add_institution')
-					->with('message','Institution has been added!')->with_input();
+					->with('message', User::message_response('success', 'Institution has been added!'))->with_input();
 			} else {
 				return Redirect::to_route('add_institution')
-					->with('message','You already have four(4) Institutions added!')->with_input();
+					->with('message', User::message_response('error', 'You already have four(4) Institutions added!'))->with_input();
 			}
 		} else {
 			return Redirect::to_route('add_institution')->with_errors($validate)->with_input(); 
@@ -183,10 +197,10 @@ class Users_Controller extends Base_Controller{
 		if($validate === true){
 			if(Examination::create_examination(Input::all())){
 				return Redirect::to_route('add_result')
-					->with('message','Result has been added!')->with_input();
+					->with('message', User::message_response('success', 'Result has been added!'))->with_input();
 			} else {
 				return Redirect::to_route('add_result')
-					->with('message','You already have eighteen(18) results added!')->with_input();
+					->with('message', User::message_response('error', 'You already have eighteen(18) results added!'))->with_input();
 			}
 		} else {
 			return Redirect::to_route('add_result')->with_errors($validate)->with_input();
@@ -218,16 +232,16 @@ class Users_Controller extends Base_Controller{
 				switch ($redirect_id) {
 					case '1':
 						return Redirect::to_route('education')
-							->with('message','Institution has been updated!');
+							->with('message', User::message_response('success', 'Institution has been updated!'));
 						break;
 					default:
 						return Redirect::to_route('add_institution')
-							->with('message','Institution has been updated!');
+							->with('message', User::message_response('success', 'Institution has been updated!'));
 						break;
 				}
 			} else {
 				return Redirect::to_route('edit_institution',array($id,$redirect_id))
-					->with('message','An error has occured, please try again!')->with_input();
+					->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
 			}
 		} else {
 			return Redirect::to_route('edit_institution',array($id,$redirect_id))->with_errors($validate)->with_input();
@@ -257,16 +271,16 @@ class Users_Controller extends Base_Controller{
 				switch ($redirect_id) {
 					case '1':
 						return Redirect::to_route('education')
-							->with('message','Result has been updated!');
+							->with('message', User::message_response('success', 'Result has been updated!'));
 						break;
 					default:
 						return Redirect::to_route('add_result')
-							->with('message','Result has been updated!');
+							->with('message', User::message_response('error', 'Result has been updated!'));
 						break;
 				}
 			} else {
 				return Redirect::to_route('edit_result',array($id,$redirect_id))
-					->with('message','An error has occured, please try again!')->with_input();
+					->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
 			}
 		} else {
 			return Redirect::to_route('edit_result',array($id,$redirect_id))->with_errors($validate)->with_input();
@@ -278,22 +292,22 @@ class Users_Controller extends Base_Controller{
 				switch ($redirect_id) {
 				case '1':
 					return Redirect::to_route('education')
-					->with('message','Institution deleted successfully!');
+					->with('message', User::message_response('success', 'Institution deleted successfully!'));
 					break;
 				default:
 					return Redirect::to_route('add_institution')
-					->with('message','Institution deleted successfully!');
+					->with('message', User::message_response('success', 'Institution deleted successfully!'));
 					break;
 			}
 		} else {
 			switch ($redirect_id) {
 				case '1':
 					return Redirect::to_route('education')
-					->with('message','An error has occured, please try again!');
+					->with('message', User::message_response('error', 'An error has occured, please try again!'));
 					break;
 				default:
 					return Redirect::to_route('add_institution')
-					->with('message','An error has occured, please try again!');
+					->with('message', User::message_response('error', 'An error has occured, please try again!'));
 					break;
 			}
 		}
@@ -304,22 +318,22 @@ class Users_Controller extends Base_Controller{
 			switch ($redirect_id) {
 				case '1':
 					return Redirect::to_route('education')
-					->with('message','Result deleted successfully!');
+					->with('message', User::message_response('success', 'Result deleted successfully!'));
 					break;
 				default:
 					return Redirect::to_route('add_result')
-					->with('message','Result deleted successfully!');
+					->with('message', User::message_response('success', 'Result deleted successfully!'));
 					break;
 			}
 		} else {
 			switch ($redirect_id) {
 				case '1':
 					return Redirect::to_route('education')
-					->with('message','An error has occured, please try again!');
+					->with('message', User::message_response('error', 'An error has occured, please try again!'));
 					break;
 				default:
 					return Redirect::to_route('add_result')
-					->with('message','An error has occured, please try again!');
+					->with('message', User::message_response('error', 'An error has occured, please try again!'));
 					break;
 			}
 		}
@@ -327,6 +341,35 @@ class Users_Controller extends Base_Controller{
 
 	public function get_password_change(){
 		return View::make('users.password_change');
+	}
+
+	public function post_password_change(){
+		$validate = User::password_validation(Input::all());
+		if($validate === true){
+			if(User::change_current_password(Input::all())){
+				return Redirect::to_route('dashboard')
+				->with('message', User::message_response('success', 'Password has been changed and will be active in the next login!'));
+			} else {
+				return Redirect::to_route('dashboard')
+				->with('message', User::message_response('error', 'An error has occured, please try again!'));
+			}
+		} else {
+			return Redirect::to_route('password_change')->with_errors($validate)->with_input();
+		}
+	}
+
+	public function post_password_reset(){
+		$validate = User::password_reset_validation(Input::all());
+		if($validate === true){
+			$user = User::reset_password(Input::all());
+			if($user !== false){
+				return View('users.password_reset_success')->with('reset_data', $user);
+			} else {
+				return Redirect::to_route('recovery')->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
+			}
+		} else {
+			return Redirect::to_route('recovery')->with_errors($validate)->with_input();
+		}
 	}
 
 	public function get_logout(){

@@ -11,7 +11,7 @@ class Biodata extends Basemodel{
 		'surname' => 'required',
 		'first_name' => 'required',
 		'email' => 'required|email',
-		'gsm_no' => 'required|numeric',
+		'gsm_no' => 'required|numeric|gsm_number',
 		'home_address' => 'required',
 		'day' => 'required|numeric',
 		'month' => 'required|numeric',
@@ -28,7 +28,7 @@ class Biodata extends Basemodel{
 	}
 
 	public static function update_biodata($data){
-		return static::where('user_id','=',$data['user_id'])->update(array(
+		$biodata_update = static::where('user_id','=',$data['user_id'])->update(array(
 			'title_id' => $data['title'],
 			'sex_id' => $data['sex'],
 			'state_of_origin_id' => $data['state'],
@@ -53,5 +53,19 @@ class Biodata extends Basemodel{
 			'is_denied_admission' => (isset($data['if_denied_admission'])) ? $data['if_denied_admission'] : 0,
 			'reason' => $data['reason']
 		));
+		if($biodata_update){
+			Bhu::update_form_status(1);
+			// Remove Name session data
+			Session::forget('firstname');
+			Session::forget('surname');
+			Session::forget('othernames');
+			// Recreate Name Session data 
+			Session::put('firstname',$data['first_name']);
+			Session::put('surname',$data['surname']);
+			Session::put('othernames',$data['other_name']);
+			return $biodata_update;
+		} else {
+			return false;
+		}
 	}
 }

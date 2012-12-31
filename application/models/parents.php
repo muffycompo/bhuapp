@@ -11,7 +11,7 @@ class Parents extends Basemodel{
 		'parent_name' => 'required',
 		'home_address' => 'required',
 		'relationship' => 'required',
-		'gsm_no' => 'required|numeric',
+		'gsm_no' => 'required|numeric|gsm_number',
 		'parent_occupation' => 'required'
 	);
 
@@ -37,7 +37,12 @@ class Parents extends Basemodel{
 				'sponsor_occupation' => $data['sponsor_occupation']
 			);
 			$parent_guardian = DB::table('parent_guardian')->where('user_id','=',$user_id)->update($update_data);
-			if($parent_guardian){return true;} else { return false;}
+			if($parent_guardian){
+				Bhu::update_form_status(3);
+				return true;
+			} else { 
+				return false;
+			}
 		} else {
 			// Insert Parent Record
 			$insert_data = array(
@@ -54,8 +59,13 @@ class Parents extends Basemodel{
 				'sponsor_gsm_no' => $data['sponsor_gsm_no'],
 				'sponsor_occupation' => $data['sponsor_occupation']
 			);
-			self::create($insert_data);
-			return true;
+			$parent_create = self::create($insert_data);
+			if($parent_create){
+				Bhu::update_form_status(3);
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 

@@ -37,16 +37,18 @@
             <div class="dash-sep"><!--  --></div>
             <h2><!-- --></h2>
             @if(Session::has('message'))
-				<div class="errorFeedback">
-					<p>{{ Session::get('message') }}</p>
-				</div>
-			@endif
+                {{ Session::get('message') }}
+            @endif
 
             <!--<div id="downloadable-forms" class="half_grid">-->
             <div id="downloadable-forms" class="full_grid">
                 <h2 class="upload">Uploaded Documents</h2>
                 <ul class="form-sections">
-                    <li><p><strong>Document 1:</strong> <a href="#">View</a> &nbsp;  <a href="#">Delete</a></p></li>
+                    @if(!empty($documents))
+                        @foreach($documents as $document)
+                            <li><p><strong>{{ $document }}:</strong> {{ HTML::link($documents_path . $document,'View', array('target'=>'_blank')) }} &nbsp;  {{ HTML::link('users/delete_doc/' . $document,'Delete') }}</p></li>
+                        @endforeach
+                    @endif
                     <br/>
                     <li class="doc">{{ HTML::link_to_route('forms','Back to Forms') }}</li>
                 </ul>

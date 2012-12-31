@@ -35,6 +35,11 @@
 
 			<div id="main-dashboard" class="inner-container clearfix">
 				<div class="dash-sep"><!--  --></div>
+				<br>
+				@if(Session::has('message'))
+					{{ Session::get('message') }}
+				@endif
+
 				<div id="downloadable-forms" class="half_grid">
 					<h2 class="download">Download Forms</h2>
 					<ul>
@@ -48,14 +53,13 @@
 
 			<div id="settings" class="half_grid">
 				<h2 class="status">Registration Status</h2>
-				<span class="completed">Complete</span>
-				<span class="not-completed">Incomplete</span>
+				@include('users.partials.user_registration_status')
 
 			<div class="dash-sep-inner"><!--  --></div>
-			                           	<h2 class="settings">Settings</h2>
-			                           	<ul>
-			                           		<li class="doc">{{ HTML::link_to_route('password_change','Change Password') }}</li>
-			                           	</ul>
+               	<h2 class="settings">Settings</h2>
+               	<ul>
+               		<li class="doc">{{ HTML::link_to_route('password_change','Change Password') }}</li>
+               	</ul>
 			</div><!-- end settings -->	
 
 				<div class="full_grid">

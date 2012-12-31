@@ -27,12 +27,9 @@
 			<!-- Sign In Tab Content -->
 			<div id="signIn">
 				@if(Session::has('message'))
-					<div class="errorFeedback">
-						<p>{{ Session::get('message') }}</p>
-					</div>
+					{{ Session::get('message') }}
 				@endif
 
-				<!-- <form action="#" method="POST" class="cleanForm"> -->
 					{{ Form::open('users/login','POST', array('class'=>'cleanForm')) }}
 				
 					<fieldset>
@@ -58,7 +55,7 @@
 
 						<div class="formExtra">
 							<p><strong>Trouble login in?</strong></p>
-							<p>{{ HTML::link_to_route('recovery', 'Recover your password') }}<!-- <a href="recover-password.html"></a> --> or {{ HTML::link_to_route('signup', 'Activate your PIN') }}<!-- <a href="signup.html">Activate your PIN</a> --></p>
+							<p>{{ HTML::link_to_route('recovery', 'Reset your password') }} or {{ HTML::link_to_route('signup', 'Activate your PIN') }}</p>
 						</div>
 
 					</fieldset>

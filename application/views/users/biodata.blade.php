@@ -10,7 +10,7 @@
 			<a href="/users/dashboard">
 				<div class="signInTabContentDash">
 					<span>Welcome to your Dashboard</span>
-					<h1>{{ Session::get('credentials')['surname'] . ' ' . Session::get('credentials')['firstname'] . ' ' . Session::get('credentials')['othernames'] }}</h1>
+					@include('users.partials.user_header')
 				</div>
 			</a>
 			<span class="activeTabArrow"><!-- --></span>
