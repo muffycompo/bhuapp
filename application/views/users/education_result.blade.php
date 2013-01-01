@@ -46,7 +46,7 @@
 <div id="signUp-dash" class="clearfix">
 
 		{{ Form::open('users/add_result','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
-	
+		{{ Form::token() }}
 		<fieldset>
 			@if(Bhu::check_examination())
 			<table class="examinations_passed">
@@ -87,11 +87,11 @@
 				<tbody>
 					@foreach($examination_data as $examination)
 					<tr>
-						<td class="selectInputExam"><span>{{ $examination->exam_type_id }}</span></td>
+						<td class="selectInputExam"><span>{{ Expand::exam_type($examination->exam_type_id) }}</span></td>
 						<td class="smallInput"><span>{{ $examination->exam_date }}</span></td>
 						<td class="longInputExamNo"><span>{{ $examination->exam_number }}</span></td>
-						<td class="selectInputSubject"><span>{{ $examination->exam_subject_id }}</span></td>
-						<td class="selectInputGrade"><span>{{ $examination->exam_grade_id }}</span></td>
+						<td class="selectInputSubject"><span>{{ Expand::exam_subject($examination->exam_subject_id) }}</span></td>
+						<td class="selectInputGrade"><span>{{ Expand::exam_grade($examination->exam_grade_id) }}</span></td>
 						<td class="tb_action">{{ HTML::link('users/edit_result/' . $examination->id . '/2','',array('class'=>'editMoreIcon','title'=>'Edit','alt'=>'Edit')) }} {{ HTML::link('users/delete_result/' . $examination->id . '/2','',array('class'=>'deleteMoreIcon','title'=>'Delete','alt'=>'Delete')) }}</td>
 					</tr>
 					@endforeach

@@ -46,7 +46,7 @@
 <!-- Sign Up Tab Content -->
 <div id="signUp-dash" class="clearfix">
 		{{ Form::open('users/parents','POST',array('id'=>'signUpForm','class'=>'cleanForm')) }}
-	
+		{{ Form::token() }}
 		<fieldset>
 
 			<p>

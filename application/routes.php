@@ -68,6 +68,7 @@ Route::post('/users/upload', array('uses'=>'users@upload'));
 Route::post('/users/uploaded', array('uses'=>'users@uploaded'));
 Route::post('/users/password_change', array('uses'=>'users@password_change'));
 Route::post('/users/password_reset', array('uses'=>'users@password_reset'));
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
@@ -139,4 +140,9 @@ Route::filter('csrf', function()
 Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::to('login');
+});
+
+Route::filter('mauth', function()
+{
+	if (Auth::guest()) return Redirect::to_route('home')->with('message','You MUST log in to continue!');
 });

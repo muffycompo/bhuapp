@@ -42,7 +42,7 @@
 		<!-- Sign Up Tab Content -->
 		<div id="signUp-dash" class="clearfix">
 		{{ Form::open('users/edit_institution','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
-	
+		{{ Form::token() }}
 		<fieldset>
 		
 					<table class="institutions_attended">

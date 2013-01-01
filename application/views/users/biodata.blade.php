@@ -44,6 +44,7 @@
 <div id="signUp-dash" class="clearfix">
 
 	{{ Form::open('users/biodata','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
+	{{ Form::token() }}
 		<fieldset>
 
 			<p>

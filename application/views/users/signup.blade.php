@@ -31,7 +31,7 @@
 			@endif
 				
 			{{ Form::open('users/signup','POST', array('class'=>'cleanForm','id'=>'signUpForm')) }}
-		
+			{{ Form::token() }}
 			<fieldset>
 
 				<p>
@@ -83,9 +83,9 @@
 			
 				{{ Form::submit('Signup',array('class'=>'inputStyleBtn')) }}
 
-				<div class="formExtra">
+				<!-- <div class="formExtra">
 					<p><strong>Note: </strong> Fields marked with <span class="requiredField">*</span> are required.</p>
-				</div>
+				</div> -->
 
 			</fieldset>
 			
@@ -96,6 +96,7 @@
 				<h3>Important Information</h3>
 				
 				<ul>
+					<li>Fields marked with <span class="requiredField">*</span> are required.</li>
 					<li>Ensure that you provide a valid Email address and GSM number so as to receive your <strong>Username</strong> and <strong>Password</strong></li>
 				</ul>
 			</div> <!-- end sidebar -->

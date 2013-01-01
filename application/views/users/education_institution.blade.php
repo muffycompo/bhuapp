@@ -46,7 +46,7 @@
 <div id="signUp-dash" class="clearfix">
 
 		{{ Form::open('users/add_institution','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
-	
+		{{ Form::token() }}
 		<fieldset>
 			@if(Bhu::check_institution())
 			<table class="institutions_attended">

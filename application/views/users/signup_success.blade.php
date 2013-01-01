@@ -20,7 +20,7 @@
 				    Password: <strong>{{ $user_details['password'] }}</strong>
 				</p>	
 				<p>
-				    We have sent a copy of this credentials to your email address: <strong>{{ $user_details['email'] }}</strong> and GSM number: <strong>{{ $user_details['gsm_no'] }}</strong>
+				    We have sent this details to your email address: <strong>{{ $user_details['email'] }}</strong> and GSM number: <strong>{{ $user_details['gsm_no'] }}</strong>
 				</p>
 				<p>{{ HTML::link('/','Login') }}<!-- <a href="index.html"></a> --> to continue your registration.</p>
 			</div><!-- end signup-success -->

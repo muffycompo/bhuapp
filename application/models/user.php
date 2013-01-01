@@ -97,6 +97,8 @@ class User extends Basemodel{
 			Session::put('firstname', $user_biodata->firstname);
 			Session::put('surname', $user_biodata->surname);
 			Session::put('othernames', $user_biodata->othernames);
+			// Check if the user wants to be remembered
+			if($data['remember'] == 1) { Auth::login($user_auth->id, true);}
 			return $session_array;
 		} else {
 			return false;

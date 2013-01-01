@@ -2,6 +2,12 @@
 class Users_Controller extends Base_Controller{
 	public $restful = true;
 
+	public function __construct(){
+		$this->filter('before', 'csrf')->on('post');
+		$this->filter('before', 'mauth')->except(array('password_reset','signup'));
+		DB::profile();
+	}
+
 	public function post_login(){
 		$validate = User::user_validation(Input::all());
 		if($validate === true){

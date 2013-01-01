@@ -41,7 +41,7 @@
 				@endif
 
             	{{ Form::open('users/password_change','POST',array('class'=>'cleanForm')) }}
-
+				{{ Form::token() }}
                 <fieldset>
 
                     <p>

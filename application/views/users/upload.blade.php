@@ -50,6 +50,7 @@
                 <h2 class="upload">Upload Passport</h2>
 
                 {{ Form::open_for_files('users/upload','POST', array('class'=>'cleanForm')) }}
+                {{ Form::token() }}
                     <ul class="form-sections">
                         <li>{{ Form::file('upload_passport') }}</li>
                         <li>{{ Form::submit('Upload', array('name'=>'submit','class'=>'inputStyleBtnL')) }}</li>
@@ -74,6 +75,7 @@
             <div id="settings" class="half_grid">
                 <h2 class="upload">Upload Supporting Documents</h2>
                 {{ Form::open_for_files('users/upload','POST', array('class'=>'cleanForm')) }}
+                {{ Form::token() }}
                     <ul class="form-sections">
                         <li>{{ Form::file('upload_docs') }}</li>
                         <li>{{ Form::submit('Upload', array('name'=>'submit','class'=>'inputStyleBtnL')) }}</li>

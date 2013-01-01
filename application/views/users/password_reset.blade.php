@@ -9,6 +9,7 @@
 				{{ Session::get('message') }}
 			@endif
 			{{ Form::open('users/password_reset','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
+			{{ Form::token() }}
 				<fieldset>
 					<p>
 						<label for="username">Username: <span class="requiredField">*</span></label>

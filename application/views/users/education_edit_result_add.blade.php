@@ -43,7 +43,7 @@
 		<div id="signUp-dash" class="clearfix">
 
 		{{ Form::open('users/edit_result','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
-	
+		{{ Form::token() }}
 		<fieldset>
 
 			<table class="examinations_passed">

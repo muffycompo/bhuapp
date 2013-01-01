@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 01, 2013 at 12:03 AM
+-- Generation Time: Jan 01, 2013 at 08:24 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -493,7 +493,21 @@ INSERT INTO `laravel_migrations` (`bundle`, `name`, `batch`) VALUES
 ('application', '2012_12_25_213229_create_bank_table', 1),
 ('application', '2012_12_25_214313_create_pin_table', 1),
 ('application', '2012_12_27_192627_create_denomination_table', 2),
-('application', '2012_12_31_125521_create_statuses_table', 3);
+('application', '2012_12_31_125521_create_statuses_table', 3),
+('application', '2013_01_01_193106_create_session_table', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laravel_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `laravel_sessions` (
+  `id` varchar(40) NOT NULL,
+  `last_activity` int(11) NOT NULL,
+  `data` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -555,15 +569,7 @@ CREATE TABLE IF NOT EXISTS `pins` (
   `pin_no` varchar(200) NOT NULL,
   `pin_status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `pins`
---
-
-INSERT INTO `pins` (`id`, `bank_id`, `user_id`, `teller`, `pin_no`, `pin_status`) VALUES
-(1, 1, 2, '12345', '123456123456', 1),
-(2, 2, 5, '54321', '654321654321', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
