@@ -62,8 +62,7 @@
                     @if(Bhu::passport() === false)
                         {{ HTML::image('/img/avatar_placeholder.png', 'Passport Photo') }}
                     @else
-                        <!-- TODO: implement an image resizer to take care of resizing the passport -->
-                        {{ HTML::image(Bhu::passport(), 'Passport Photo', array('width'=>'105','height'=>'115')) }}
+                        {{ HTML::image(Bhu::passport(), 'Passport Photo') }}
                     @endif
                 </div>
                 <br />
