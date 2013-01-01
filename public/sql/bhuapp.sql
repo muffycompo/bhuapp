@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 31, 2012 at 12:46 AM
+-- Generation Time: Jan 01, 2013 at 12:03 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -76,15 +76,7 @@ CREATE TABLE IF NOT EXISTS `biodata` (
   `is_denied_admission` tinyint(1) NOT NULL,
   `reason` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `biodata`
---
-
-INSERT INTO `biodata` (`id`, `user_id`, `title_id`, `sex_id`, `state_of_origin_id`, `country_id`, `religion_id`, `marital_status_id`, `formno`, `surname`, `firstname`, `othernames`, `home_address`, `gsm_no`, `email_address`, `date_of_birth`, `pastor_name`, `pastor_address`, `pastor_gsm_no`, `denomination_id`, `maiden_name`, `former_name`, `is_suspended`, `is_expelled`, `is_denied_admission`, `reason`) VALUES
-(2, 2, 1, 1, 9, 118, 1, 1, '943056', 'Onen', 'Mfawa', 'Alfred Barka', 'Somewhere in nevada', '08059443154', 'muffycompoqm@gmail.com', '1994-09-12', 'Rev. Father Johnson', 'Some Church in the heavens', '08030796088', '3', '', '', 1, 0, 0, 'I was sturborn'),
-(5, 5, 0, 0, 0, 0, 0, 0, '252903', 'Onen', 'Ikpi', '', '', '08030796088', 'ikpi03@gmail.com', '', '', '', '', '', '', '', 0, 0, 0, '');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -315,14 +307,7 @@ CREATE TABLE IF NOT EXISTS `education` (
   `jamb_number` varchar(20) NOT NULL,
   `jamb_score` varchar(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `education`
---
-
-INSERT INTO `education` (`id`, `user_id`, `first_choice_id`, `second_choice_id`, `jamb_number`, `jamb_score`) VALUES
-(1, 2, 8, 12, '06440347AB', '201');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -339,14 +324,7 @@ CREATE TABLE IF NOT EXISTS `examinations` (
   `exam_subject_id` int(11) NOT NULL,
   `exam_grade_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `examinations`
---
-
-INSERT INTO `examinations` (`id`, `user_id`, `exam_type_id`, `exam_date`, `exam_number`, `exam_subject_id`, `exam_grade_id`) VALUES
-(5, 2, 1, '2010', '4123456789', 1, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -476,14 +454,7 @@ CREATE TABLE IF NOT EXISTS `institutions` (
   `to_year` varchar(4) NOT NULL,
   `qualification` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
---
--- Dumping data for table `institutions`
---
-
-INSERT INTO `institutions` (`id`, `user_id`, `institution_name`, `from_year`, `to_year`, `qualification`) VALUES
-(6, 2, 'Another School', '2000', '2002', 'JSCE');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -521,7 +492,8 @@ INSERT INTO `laravel_migrations` (`bundle`, `name`, `batch`) VALUES
 ('application', '2012_12_25_142011_create_examtype_table', 1),
 ('application', '2012_12_25_213229_create_bank_table', 1),
 ('application', '2012_12_25_214313_create_pin_table', 1),
-('application', '2012_12_27_192627_create_denomination_table', 2);
+('application', '2012_12_27_192627_create_denomination_table', 2),
+('application', '2012_12_31_125521_create_statuses_table', 3);
 
 -- --------------------------------------------------------
 
@@ -567,14 +539,7 @@ CREATE TABLE IF NOT EXISTS `parent_guardian` (
   `sponsor_gsm_no` varchar(15) NOT NULL,
   `sponsor_occupation` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `parent_guardian`
---
-
-INSERT INTO `parent_guardian` (`id`, `user_id`, `parent_name`, `parent_home_address`, `parent_office_address`, `relationship`, `parent_gsm_no`, `parent_email_address`, `parent_occupation`, `sponsor_name`, `sponsor_address`, `sponsor_gsm_no`, `sponsor_occupation`) VALUES
-(1, 2, 'Mr. John Wandara', 'Somewhere in Nevada and Jinx', 'Somewhere in Silicon Valley', 'Father', '08059443154', 'muffycompoqm@hotmail.com', 'Medical Doctor', 'Mr. John Wandara', 'Somewhere in Nevada and Jinx', '08059443154', 'Medical Doctor');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -717,6 +682,19 @@ INSERT INTO `states` (`id`, `state_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `statuses`
+--
+
+CREATE TABLE IF NOT EXISTS `statuses` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `form_completion` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `titles`
 --
 
@@ -753,15 +731,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `updated_at`) VALUES
-(2, 'mfaone943056', '$2a$08$a8GrfbabjKNWSMnzzOopCuZGsseC.mkBpiyOZGET2Ynlt6dbG1ukm', '2012-12-26 20:54:37', '2012-12-26 20:54:37'),
-(5, 'ikpone252903', '$2a$08$6TwPro/TOdlLpkLGAPdsNu7.nt3NJWoYB//Zt.IyaSaz0CVaRBgjK', '2012-12-27 18:33:24', '2012-12-27 18:33:24');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
