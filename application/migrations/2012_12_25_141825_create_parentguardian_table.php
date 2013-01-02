@@ -15,7 +15,7 @@ class Create_Parentguardian_Table {
 			$table->string('parent_name','40');
 			$table->text('parent_home_address');
 			$table->text('parent_office_address');
-			$table->string('relationship','120');
+			$table->integer('relationship');
 			$table->string('parent_gsm_no','15');
 			$table->string('parent_email_address');
 			$table->string('parent_occupation','150');

@@ -57,7 +57,7 @@
                     </p>
 
                     <p>
-                        {{ Form::label('password_confirmation','Re-Password:') }}
+                        {{ Form::label('password_confirmation','Confirm Password:') }}
                         {{ Form::mpassword('password_confirmation', Input::old('password_confirmation'), array('class'=>'inputStyle')) }}
                         {{ $errors->first('password_confirmation','<em class="emsg">:message</em>') }}
                     </p>

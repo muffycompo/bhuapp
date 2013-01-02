@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Bingham University - v0.1 alpha</title>
+	<title>Bingham University - v0.2 alpha</title>
 	{{ HTML::style('/css/960_12_col.css') }}
 	{{ HTML::style('/css/style.css') }}
 	<!--[if lt IE 7 ]>	<html class="ie6"> <![endif]-->

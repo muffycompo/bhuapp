@@ -48,9 +48,7 @@ class Biodata extends Basemodel{
 			'denomination_id' => $data['denomination'],
 			'maiden_name' => $data['maiden_name'],
 			'former_name' => $data['former_names'],
-			'is_suspended' => (isset($data['if_suspended'])) ? $data['if_suspended'] : 0,
-			'is_expelled' => (isset($data['if_expelled'])) ? $data['if_expelled'] : 0,
-			'is_denied_admission' => (isset($data['if_denied_admission'])) ? $data['if_denied_admission'] : 0,
+			'has_reason' => (isset($data['has_reason'])) ? $data['has_reason'] : 0,
 			'reason' => $data['reason']
 		));
 		if($biodata_update){

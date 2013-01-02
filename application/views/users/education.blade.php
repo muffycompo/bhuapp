@@ -79,6 +79,14 @@
 			<p>
 				{{ Form::label('jamb_score','JAMB Score:') }}
 				{{ Form::text('jamb_score', (!empty($education_data->jamb_score))? $education_data->jamb_score : Input::old('jamb_score'), array('id'=>'jamb_score','class'=>'inputStyle')) }}
+				{{ $errors->first('jamb_score','<em class="emsg">:message</em>') }}
+			</p>
+
+			<p>
+				<div class="distanceLeft">
+					{{ Form::checkbox('awaiting_result',1,(!empty($education_data->jamb_score) && $education_data->jamb_score == 0)? true : false,array('class'=>'inputStyleChk','id'=>'awaiting_result')) }}
+					{{ Form::label('awaiting_result','Awaiting JAMB result.') }}
+				</div>
 			</p>
 			@if(!empty($institution_data))
 			<table class="institutions_attended">
@@ -144,7 +152,7 @@
 		<ul>
 			<li>Please read carefully before filling this form.</li>
 			<li>Fields marked with <span class="requiredField">*</span> are required.</li>
-			<li>If <strong>JAMB Score</strong> is not available, enter A/R for Awaiting Result.</li>
+			<li>If <strong>JAMB Score</strong> is not available,  just check the "<strong>Awaiting JAMB result</strong>" checkbox.</li>
 			<li>Enter only the year (YYYY) in <strong>To</strong>, <strong>From</strong> and <strong>Date</strong> fields. E.g. <strong>2010</strong></li>
 		</ul>
 	</div> <!-- end sidebar -->
@@ -156,4 +164,5 @@
 	</div> <!-- end signIn -->
 
 </div> <!-- end pageContainer -->
+@include('users.partials.user_js')
 @endsection

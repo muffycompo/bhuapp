@@ -32,9 +32,7 @@ class Create_Biodata_Table {
 			$table->integer('denomination_id');
 			$table->string('maiden_name','30');
 			$table->string('former_name','30');
-			$table->boolean('is_suspended');
-			$table->boolean('is_expelled');
-			$table->boolean('is_denied_admission');
+			$table->boolean('has_reason');
 			$table->text('reason');
 		});
 	}

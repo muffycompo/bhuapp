@@ -46,7 +46,7 @@
                 <ul class="form-sections">
                     @if(!empty($documents))
                         @foreach($documents as $document)
-                            <li><p><strong>{{ $document }}:</strong> {{ HTML::link($documents_path . $document,'View', array('target'=>'_blank')) }} &nbsp;  {{ HTML::link('users/delete_doc/' . $document,'Delete') }}</p></li>
+                            <li><p><strong>{{ $document }}:</strong> {{ HTML::link($documents_path . $document,'View', array('target'=>'_blank')) }} &nbsp;  {{ HTML::link('users/delete_doc/' . str_replace('.','-',$document),'Delete') }}</p></li>
                         @endforeach
                     @endif
                     <br/>

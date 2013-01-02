@@ -172,21 +172,21 @@
 
 			<p>
 				<div class="distanceLeft">
-					{{ Form::radio('has_reason',1,($biodata->has_reason == 1)? true : false,array('class'=>'inputStyleChk','id'=>'if_suspended')) }}
+					{{ Form::checkbox('if_suspended',1,($biodata->is_suspended == 1)? true : false,array('class'=>'inputStyleChk','id'=>'if_suspended')) }}
 					{{ Form::label('if_suspended','I have been suspended before.') }}
 				</div>
 			</p>
 
 			<p>
 				<div class="distanceLeft">
-					{{ Form::radio('has_reason',2,($biodata->has_reason == 2)? true : false,array('class'=>'inputStyleChk','id'=>'if_expelled')) }}
+					{{ Form::checkbox('if_expelled',1,($biodata->is_expelled == 1)? true : false,array('class'=>'inputStyleChk','id'=>'if_expelled')) }}
 					{{ Form::label('if_expelled','I have been expelled before.') }}
 				</div>
 			</p>
 
 			<p>
 				<div class="distanceLeft">
-					{{ Form::radio('has_reason',3,($biodata->has_reason == 3)? true : false,array('class'=>'inputStyleChk','id'=>'if_denied_admission')) }}
+					{{ Form::checkbox('if_denied_admission',1,($biodata->is_denied_admission == 1)? true : false,array('class'=>'inputStyleChk','id'=>'if_denied_admission')) }}
 					{{ Form::label('if_denied_admission','I have been denied admission before.') }}
 				</div>
 			</p>

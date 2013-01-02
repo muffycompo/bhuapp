@@ -69,7 +69,7 @@
 
 			<p>
 				<label for="relationship">Relationship: <span class="requiredField">*</span></label>
-				{{ Form::text('relationship',(!empty($parent->relationship))? $parent->relationship : Input::old('relationship'), array('class'=>'inputStyle','id'=>'relationship')) }}
+				{{ Bhu::relationship_dropdown('relationship',(!empty($parent->relationship))? $parent->relationship : Input::old('relationship'), array('class'=>'inputStyle','id'=>'relationship')) }}
 				{{ $errors->first('relationship','<em class="emsg">:message</em>') }}
 			</p>
 			

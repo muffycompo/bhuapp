@@ -178,6 +178,7 @@ class Users_Controller extends Base_Controller{
 	}
 
 	public function get_delete_doc($document){
+		$document = str_replace('-','.',$document);
 		if(User::remove_document($document)){
 			return Redirect::to_route('uploaded')->with('message', User::message_response('success', $document . ' has been deleted'));
 		} else {

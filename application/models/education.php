@@ -8,11 +8,21 @@ class Education extends Basemodel{
 	}
 
 	public static $education_rules = array(
-		'jamb_number' => 'required'
+		'jamb_number' => 'required|exam_number',
+		'jamb_score' => 'required|numeric'
+	);
+
+	public static $education_rules_ar = array(
+		'jamb_number' => 'required|exam_number'
 	);
 
 	public static function education_validation($input){
-		return static::validation($input, static::$education_rules);
+		$awaiting_result = (isset($input['awaiting_result']))? $input['awaiting_result'] : 0;
+		if($awaiting_result == 1){
+			return static::validation($input, static::$education_rules_ar);
+		} else {
+			return static::validation($input, static::$education_rules);
+		}
 	}
 	
 	public static function create_education($data){

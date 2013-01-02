@@ -147,6 +147,7 @@ class User extends Basemodel{
 	public static function documents(){
 		$username = Session::get('credentials')['username'];
 		$files = Bhu::document_list($username);
+		$file = array();
 		foreach($files as $k => $v){
             $file[] = $v;
         }

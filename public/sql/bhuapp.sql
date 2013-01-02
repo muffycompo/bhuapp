@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 01, 2013 at 08:24 PM
+-- Generation Time: Jan 02, 2013 at 11:06 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -71,9 +71,7 @@ CREATE TABLE IF NOT EXISTS `biodata` (
   `denomination_id` varchar(30) NOT NULL,
   `maiden_name` varchar(30) NOT NULL,
   `former_name` varchar(30) NOT NULL,
-  `is_suspended` tinyint(1) NOT NULL,
-  `is_expelled` tinyint(1) NOT NULL,
-  `is_denied_admission` tinyint(1) NOT NULL,
+  `has_reason` tinyint(1) NOT NULL,
   `reason` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -390,8 +388,8 @@ INSERT INTO `exam_subjects` (`id`, `subject_name`) VALUES
 (17, 'Agricultural Science'),
 (18, 'Technical Drawing '),
 (19, 'Financial Accounting '),
-(20, 'Christian Religion Knowledge (CRK)'),
-(21, 'Islamic Religion Knowledge (IRK)		'),
+(20, 'Christian Religion Knowledge'),
+(21, 'Islamic Religion Knowledge        '),
 (22, 'Food and Nutrition		'),
 (23, 'Visual Art		'),
 (24, 'Home Management');
@@ -493,7 +491,8 @@ INSERT INTO `laravel_migrations` (`bundle`, `name`, `batch`) VALUES
 ('application', '2012_12_25_214313_create_pin_table', 1),
 ('application', '2012_12_27_192627_create_denomination_table', 2),
 ('application', '2012_12_31_125521_create_statuses_table', 3),
-('application', '2013_01_01_193106_create_session_table', 4);
+('application', '2013_01_01_193106_create_session_table', 4),
+('application', '2013_01_02_204709_create_relationships_table', 5);
 
 -- --------------------------------------------------------
 
@@ -543,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `parent_guardian` (
   `parent_name` varchar(40) NOT NULL,
   `parent_home_address` text NOT NULL,
   `parent_office_address` text NOT NULL,
-  `relationship` varchar(120) NOT NULL,
+  `relationship` int(11) NOT NULL,
   `parent_gsm_no` varchar(15) NOT NULL,
   `parent_email_address` varchar(200) NOT NULL,
   `parent_occupation` varchar(150) NOT NULL,
@@ -611,6 +610,40 @@ INSERT INTO `programmes` (`id`, `programme_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `relationships`
+--
+
+CREATE TABLE IF NOT EXISTS `relationships` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `relationship_name` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Dumping data for table `relationships`
+--
+
+INSERT INTO `relationships` (`id`, `relationship_name`) VALUES
+(1, 'Father'),
+(2, 'Mother'),
+(3, 'Uncle'),
+(4, 'Aunty'),
+(5, 'Brother'),
+(6, 'Sister'),
+(7, 'Husband'),
+(8, 'Wife'),
+(9, 'Son'),
+(10, 'Daughter'),
+(11, 'Cousin'),
+(12, 'Nephew'),
+(13, 'Niece'),
+(14, 'Parent'),
+(15, 'Spouse'),
+(16, 'Other');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `religion`
 --
 
@@ -639,7 +672,7 @@ CREATE TABLE IF NOT EXISTS `states` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `state_name` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `states`
@@ -682,7 +715,8 @@ INSERT INTO `states` (`id`, `state_name`) VALUES
 (34, 'Taraba'),
 (35, 'Yobe'),
 (36, 'Zamfara'),
-(37, 'FCT');
+(37, 'FCT'),
+(38, 'Outside Nigeria');
 
 -- --------------------------------------------------------
 
@@ -707,7 +741,7 @@ CREATE TABLE IF NOT EXISTS `titles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title_name` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `titles`
@@ -721,7 +755,8 @@ INSERT INTO `titles` (`id`, `title_name`) VALUES
 (5, 'Prof'),
 (6, 'Chief'),
 (7, 'Alhaji'),
-(8, 'Hajiya');
+(8, 'Hajiya'),
+(9, 'Other');
 
 -- --------------------------------------------------------
 

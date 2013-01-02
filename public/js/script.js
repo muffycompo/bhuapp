@@ -103,4 +103,19 @@ $(document).ready(function(){
 		}
 	});
 
+	// JAMB Awaiting Result
+	var score = $('input#jamb_score');
+	var ar = $('input#awaiting_result');
+	if(score.val() == 'A/R'){
+		score.attr('readonly',true);
+		ar.attr('checked','true');
+	}
+	ar.on('click', function(){
+		if(ar.is(':checked') === true){
+			$('input#jamb_score').attr('readonly', true).val('A/R');
+		} else {
+			$('input#jamb_score').attr('readonly', false).val('');
+		}
+	});
+
 });

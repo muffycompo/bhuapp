@@ -58,7 +58,7 @@
 			<h2 class="upload">Uploads</h2>
 
 			<ul>
-				<li class="doc">{{ HTML::link_to_route('upload','Upload Passport &amp; Documents') }}</li>
+				<li class="doc">{{ HTML::link_to_route('upload','Upload Passport &amp; Supporting Documents') }}</li>
 				<li class="doc">{{ HTML::link_to_route('uploaded','View Uploaded Documents') }}</li>
 			</ul>
 
