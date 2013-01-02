@@ -5,6 +5,13 @@
 	<title>Bingham University - v0.1 alpha</title>
 	{{ HTML::style('/css/960_12_col.css') }}
 	{{ HTML::style('/css/style.css') }}
+	<!--[if lt IE 7 ]>	<html class="ie6"> <![endif]-->
+	<!--[if lt IE 7 ]>
+		{{ HTML::script('/js/DD_belatedPNG.js') }}
+		<script>
+			DD_belatedPNG.fix('img, .logout-exit, .print, .form, .upload, .guide, .status, .download, .settings, .signInTabContentDash, .signInTabContent, .signUpTabContentDash, .signUpTabContent, li, .activeTabArrow, .addMore, .deleteMore, .deleteMoreIcon, .editMore, .reg-forms-complete');
+		</script>
+	<![endif]-->
 </head>
 <body>
 

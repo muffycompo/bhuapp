@@ -1,11 +1,11 @@
 /**********************************************************************************
 
 	Project Name: Bingham University Applicants Portal
-	Project Description: Registration Portal
+	Project Description: Registration Portal Style
 	File Name: style.css
 	Author: Mfawa Alfred Onen
 	Author URI: http://www.maomuffy.com
-	Version: 1.0.0
+	Version: 1.1.0
 	
 **********************************************************************************/
 
@@ -187,7 +187,8 @@ div#signIn, div#signUp {
 	background: -moz-linear-gradient(top, white, #f0f2f4 1px, white 50px);
 	background: -webkit-gradient(linear, 0 0, 0 50, from(white), color-stop(2%, #f0f2f4), to(white));
  }
-div#signIn form.cleanForm { width: 440px; margin: 0 auto; }
+/*div#signIn form.cleanForm { width: 440px; margin: 0 auto; }*/
+div#signIn form.cleanForm { width: 500px; margin: 0 auto; }
 
 /* --------- Signup Forms --------- */
 div#signUp-dash form.cleanForm,
@@ -226,6 +227,14 @@ div#sidebar {
 /* --------- Form Styles --------- */
 form.cleanForm p { margin-bottom: 15px; }
 
+.ie6 form.cleanForm p.ie6-margin { 
+	margin-bottom: 0;
+}
+
+.ie6 form.cleanForm p { 
+	display: inline-block; 
+}
+
 	form.cleanForm div a,
 	form.cleanForm p a {
 		color: #1271c1;
@@ -255,11 +264,14 @@ form.cleanForm input.inputStyle-dob {
 	border: 1px solid #d5d9de;
 	outline: none;
 	height: 40px;
+	line-height: 40px;
 	width: 50px;
 	text-align: center;
 }
 
 form.cleanForm input.year {width: 80px;}
+
+.ie6 form.cleanForm input.year {width: 99px;}
 
 form.cleanForm textarea.inputStyleTa {
 	color: #787a7e;
@@ -283,6 +295,7 @@ form.cleanForm input.inputStyle {
 	border: 1px solid #d5d9de;
 	outline: none;
 	height: 40px;
+	line-height: 40px; /* fix height in IE */
 	width: 250px;
 
 	-moz-box-shadow: 0 0 0 5px #faf9f9, inset 0 0 5px 5px #faf9f9;
@@ -302,7 +315,7 @@ form.cleanForm a.inputStyleBtn {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	
+	display: inline-block;
 	background: #4caeeb; /* Fallback */
 	background: url("../img/submitButtonArrow.png") 88% center no-repeat, -moz-linear-gradient(top, #4caeeb, #39adf0);
 	background: url("../img/submitButtonArrow.png") 88% center no-repeat, -webkit-gradient(linear, 0 0, 0 100%, from(#4caeeb), to(#39adf0));
@@ -315,6 +328,10 @@ form.cleanForm a.inputStyleBtn {
 	
 	padding: 12px 45px 12px 15px;
 	cursor: pointer;
+}
+
+.ie6 form.cleanForm a.inputStyleBtn {
+	padding: 13px 45px 13px 15px;
 }
 
     form.cleanForm input.inputStyleBtnL:hover,
@@ -331,7 +348,7 @@ form.cleanForm a.inputStyleBtn {
 		
 		display: block;
 		float: left;
-		width: 130px;
+		width: 150px; /* Firefox/IE does not like anything less*/
 		height: 45px;
 		line-height: 45px;
 		
@@ -341,16 +358,19 @@ form.cleanForm a.inputStyleBtn {
 
 	form.cleanForm p em { margin-top: 15px; }
 
-	div.formExtra, div.distanceLeft input.inputStyleChk, input.inputStyleBtn, em { margin-left: 145px; }
+	div.formExtra, div.distanceLeft input.inputStyleChk, input.inputStyleBtn, em { margin-left: 165px; }
+
+	.ie6 div.formExtra, .ie6 div.distanceLeft input.inputStyleChk, .ie6 input.inputStyleBtn, .ie6 em { margin-left: 170px; }
 	
 	div.distanceLeft { margin: 25px 0 20px 0; }
+	.ie6 div.distanceLeft { margin: 0; }
 	
 	div.distanceLeft label { padding-left: 5px; }
 
 /* ---------- Sign Up ---------- */
-div#signUp form.cleanForm p label { width: 150px; }
+/*div#signUp form.cleanForm p label { width: 150px; }*/
 div#signUp div.distanceLeft input.inputStyleChk,
-div#signUp input.inputStyleBtn, div#signUp em, div#signUp div.formExtra { margin-left: 165px; }
+div#signUp input.inputStyleBtn, div#signUp em, div#signUp div.formExtra { margin-left: 185px; }
 
 
 div#signUp h1 {
@@ -440,11 +460,10 @@ div#main-dashboard h2 {
 #dashboard ul li.print { background: url("../img/icons/print.png") left center no-repeat; height: 16px; padding-left: 21px;}
 #dashboard ul li.logout-exit { background: url("../img/icons/logout.png") left center no-repeat; height: 16px; padding-left: 21px;}
 
-/*table thead th a.addMore { background: url("../img/icons/add.png") left center no-repeat; height: 16px; padding-left: 21px;}*/
+
 .addMore { background: url("../img/icons/add.png") left center no-repeat; height: 16px; padding-left: 21px;}
-/*table thead th a.deleteMore { background: url("../img/icons/delete.png") left center no-repeat; height: 16px; padding-left: 21px;}*/
-.deleteMore { background: url("../img/icons/delete.png") left center no-repeat; height: 16px; padding-left: 21px;}
-.deleteMoreIcon { background: url("../img/icons/delete.png") left center no-repeat; height: 16px; padding-left: 21px;}
+.deleteMore, .deleteMoreIcon { background: url("../img/icons/delete.png") left center no-repeat; height: 16px; padding-left: 21px;}
+/*.deleteMoreIcon { background: url("../img/icons/delete.png") left center no-repeat; height: 16px; padding-left: 21px;}*/
 .editMoreIcon { background: url("../img/icons/edit.png") left center no-repeat; height: 16px; padding-left: 21px;}
 
 #dashboard ul li span.reg-forms-complete { background: url("../img/icons/validationOk.png") right center no-repeat; height: 16px; padding-left: 21px;}
