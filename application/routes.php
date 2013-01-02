@@ -144,5 +144,5 @@ Route::filter('auth', function()
 
 Route::filter('mauth', function()
 {
-	if (Auth::guest()) return Redirect::to_route('home')->with('message','You MUST log in to continue!');
+	if (Auth::guest()) return Redirect::to_route('home')->with('message',User::message_response('error', 'You need to log in before accessing that area!'));
 });

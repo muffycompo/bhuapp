@@ -7,7 +7,7 @@
 	<!-- Tabs -->
 	<ul id="tabs" class="clearfix">
 		<li class="inactiveTab fl" id="signInTab">
-			<a href="/users/dashboard">
+			<a href="{{ URL::base() }}/users/dashboard">
 				<div class="signInTabContentDash">
 					<span>Welcome to your Dashboard</span>
 					@include('users.partials.user_header') 
@@ -44,11 +44,22 @@
 		@endif
 <!-- Sign Up Tab Content -->
 <div id="signUp-dash" class="clearfix">
-
+		<br>
 		{{ Form::open('users/education','POST',array('class'=>'cleanForm', 'id'=>'signUpForm')) }}
 		{{ Form::token() }}
 		<fieldset>
-
+			<p class="lb">Institutions attended with dates: <span class="requiredField">*</span> 
+				@if(Bhu::check_institution())
+				{{ HTML::link('users/add_institution','Add Institution(s)',array('class'=>'addMore','alt'=>'Add New Institution','title'=>'Add New Institution')) }}
+				@endif
+			</p>
+			<br>
+			<p class="lb">Examinations Passed: <span class="requiredField">*</span>
+				@if(Bhu::check_examination())
+				{{ HTML::link('users/add_result','Add Result(s)',array('class'=>'addMore','alt'=>'Add New Result','title'=>'Add New Result')) }}
+				@endif
+			</p>
+			<br>
 			<p>
 				<label for="first_choice">First Choice: <span class="requiredField">*</span></label>
 				{{ Bhu::programme_dropdown('first_choice', (!empty($education_data->first_choice_id))? $education_data->first_choice_id : Input::old('first_choice'), array('id'=>'first_choice','class'=>'inputStyle')) }}
@@ -61,19 +72,13 @@
 
 			<p>
 				<label for="jamb_number">JAMB Number: <span class="requiredField">*</span></label>
-				{{ Form::text('jamb_number', (!empty($education_data->jamb_number))? $education_data->jamb_number : Input::old('jamb_number'), array('id'=>'jamb_number','class'=>'inputStyle')) }}
+				{{ Form::text('jamb_number', (!empty($education_data->jamb_number))? $education_data->jamb_number : Input::old('jamb_number'), array('id'=>'jamb_number','class'=>'inputStyle','maxlength'=>'10')) }}
 				{{ $errors->first('jamb_number','<em class="emsg">:message</em>') }}
 			</p>
 
 			<p>
 				{{ Form::label('jamb_score','JAMB Score:') }}
 				{{ Form::text('jamb_score', (!empty($education_data->jamb_score))? $education_data->jamb_score : Input::old('jamb_score'), array('id'=>'jamb_score','class'=>'inputStyle')) }}
-			</p>
-
-			<p class="lb">Institutions attended with dates: <span class="requiredField">*</span> 
-				@if(Bhu::check_institution())
-				{{ HTML::link('users/add_institution','Add Institution(s)',array('class'=>'addMore','alt'=>'Add New Institution','title'=>'Add New Institution')) }}
-				@endif
 			</p>
 			@if(!empty($institution_data))
 			<table class="institutions_attended">
@@ -99,11 +104,7 @@
 				</tbody>
 			</table>
 			@endif
-			<p class="lb">Examinations Passed: <span class="requiredField">*</span>
-				@if(Bhu::check_examination())
-				{{ HTML::link('users/add_result','Add Result(s)',array('class'=>'addMore','alt'=>'Add New Result','title'=>'Add New Result')) }}
-				@endif
-			</p>
+			
 			@if(!empty($examination_data))
 			<table class="examinations_passed">
 				<thead>
@@ -122,7 +123,7 @@
 						<td class="selectInputExam"><span>{{ Expand::exam_type($examination->exam_type_id) }}</span></td>
 						<td class="smallInput"><span>{{ $examination->exam_date }}</span></td>
 						<td class="longInputExamNo"><span>{{ $examination->exam_number }}</span></td>
-						<td class="selectInputSubject"><span>{{ Exand::exam_subject($examination->exam_subject_id) }}</span></td>
+						<td class="selectInputSubject"><span>{{ Expand::exam_subject($examination->exam_subject_id) }}</span></td>
 						<td class="selectInputGrade"><span>{{ Expand::exam_grade($examination->exam_grade_id) }}</span></td>
 						<td class="tb_action">{{ HTML::link('users/edit_result/' . $examination->id . '/1','',array('class'=>'editMoreIcon','title'=>'Edit','alt'=>'Edit')) }} {{ HTML::link('users/delete_result/' . $examination->id . '/1','',array('class'=>'deleteMoreIcon','title'=>'Delete','alt'=>'Delete')) }}</td>
 					</tr>

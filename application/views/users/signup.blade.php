@@ -7,7 +7,7 @@
 			<!-- Tabs -->
 			<ul id="tabs" class="clearfix">
 				<li class="inactiveTab fl" id="signInTab">
-					<a href="/">
+					<a href="{{ URL::base() }}">
 						<div class="signInTabContent">
 							<span>Already activated your PIN?</span>
 							<h1>Login here</h1>
@@ -66,12 +66,8 @@
 
 
 				<p>
-					<label for="bank">Bank:</label>
-					<!-- <input type="text" id="bank" name="bank" class="inputStyle" /> -->
-					<select name="bank" class="inputStyle">
-						<option value="1">Guaranty Trust Bank</option>
-						<option value="2">Zenith Bank</option>
-					</select>
+					{{ Form::label('bank','Bank:') }}
+					{{ Bhu::bank_dropdown('bank',Input::old('bank'),array('class'=>'inputStyle')) }}
 					<!-- <em>Select the bank you purchased the PIN from.</em> -->
 				</p>
 				

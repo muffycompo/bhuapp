@@ -4,8 +4,8 @@ class Users_Controller extends Base_Controller{
 
 	public function __construct(){
 		$this->filter('before', 'csrf')->on('post');
-		$this->filter('before', 'mauth')->except(array('password_reset','signup'));
-		DB::profile();
+		$this->filter('before', 'mauth')->except(array('password_reset','signup','signup_success','login'));
+		// DB::profile();
 	}
 
 	public function post_login(){
@@ -78,6 +78,10 @@ class Users_Controller extends Base_Controller{
 	}
 
 	public function get_education(){
+		// Ensure the user has filled Personal Information section
+		if(Bhu::form_completion() < 1){return Redirect::to_route('forms')
+			->with('message', User::message_response('error', 'You have not completed the Personal Information section!'));
+		}
 		$education = Education::education_list();
 		$institution = Institution::institution_list();
 		$examination = Examination::examination_list();
@@ -113,6 +117,10 @@ class Users_Controller extends Base_Controller{
 	}
 
 	public function get_parents(){
+		// Ensure the user has filled Educational Information
+		if(Bhu::form_completion() < 2){return Redirect::to_route('forms')
+			->with('message', User::message_response('error', 'You have not completed the Educational Information section!'));
+		}
 		$user_data = Parents::parent_list();
 		return View::make('users.parents')->with('parent',$user_data);
 	}
@@ -133,6 +141,10 @@ class Users_Controller extends Base_Controller{
 	}
 
 	public function get_upload(){
+		// Ensure the user has filled Parents / Guardian Information section
+		if(Bhu::form_completion() < 3){return Redirect::to_route('forms')
+			->with('message', User::message_response('error', 'You have not completed the Parent/Guardian Information section!'));
+		}
 		return View::make('users.upload');
 	}
 
@@ -149,7 +161,7 @@ class Users_Controller extends Base_Controller{
 		if($validate === true){
 			$upload = User::uploads($upload_id, Input::all());
 			if($upload !== false){
-				Bhu::update_form_status(4);
+				if($upload_id == 1) { Bhu::update_form_status(4); }
 				return Redirect::to_route('upload')->with('message', User::message_response('success', 'The file has been uploaded!'));
 			} else {
 				return Redirect::to_route('upload')->with('message', User::message_response('error', 'An error has occured, please try again!'));
@@ -259,10 +271,12 @@ class Users_Controller extends Base_Controller{
 		switch ($redirect_id) {
 			case '1':
 				return View::make('users.education_edit_result')
+				->with('redirect_id', $redirect_id)
 				->with('edit_data', $edit_result);
 				break;
 			default:
 				return View::make('users.education_edit_result_add')
+				->with('redirect_id', $redirect_id)
 				->with('edit_data', $edit_result);
 				break;
 		}

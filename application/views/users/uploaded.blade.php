@@ -7,7 +7,7 @@
     <!-- Tabs -->
     <ul id="tabs" class="clearfix">
         <li class="inactiveTab fl" id="signInTab">
-            <a href="/users/dashboard">
+            <a href="{{ URL::base() }}/users/dashboard">
                 <div class="signInTabContentDash">
                     <span>Welcome to your Dashboard</span>
                     @include('users.partials.user_header')

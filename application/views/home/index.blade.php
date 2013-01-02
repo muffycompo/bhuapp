@@ -14,7 +14,7 @@
 			<span class="activeTabArrow"><!-- --></span>
 		</li>
 		<li class="inactiveTab fr" id="signUpTab">
-			<a href="/users/signup">
+			<a href="{{ URL::base() }}/users/signup">
 				<div class="signUpTabContent">
 					<span>Just got your PIN?</span>
 					<h1>Signup here</h1>

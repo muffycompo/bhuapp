@@ -416,8 +416,7 @@ INSERT INTO `exam_types` (`id`, `exam_name`) VALUES
 (1, 'WAEC'),
 (2, 'NECO'),
 (3, 'GCE	'),
-(4, 'NABTEB	'),
-(5, 'WASSCE');
+(4, 'NABTEB	');
 
 -- --------------------------------------------------------
 

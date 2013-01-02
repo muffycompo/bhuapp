@@ -240,7 +240,8 @@ form.cleanForm p { margin-bottom: 15px; }
 form.cleanForm select.inputStyle {
   	color: #787a7e;
   	font-size: 18px;
-  	padding-left: 15px;
+  	/*padding-left: 15px; - invalid rendering in firefox and internet explorer*/
+  	padding: 6px 5px 5px 14px;
   	border: 1px solid #d5d9de;
   	outline: none;
   	height: 40px;
@@ -632,7 +633,7 @@ div.formHeading {
 #dashboard table select.selectInputGrade {
 	color: #787a7e;
 	font-size: 16px;
-	padding-left: 10px;
+	padding: 6px 4px 5px 8px;
 	border: 1px solid #d5d9de;
 	outline: none;
 	height: 40px;

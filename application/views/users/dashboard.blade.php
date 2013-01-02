@@ -14,7 +14,7 @@
 				<span class="activeTabArrow"><!-- --></span>
 			</li>
 			<li class="inactiveTab fr" id="signUpTab">
-				<a href="/users/forms">
+				<a href="{{ URL::base() }}/users/forms">
 					<div class="signUpTabContentDash">
 						<span>Fill the online</span>
 						<h1>Registration Forms</h1>
