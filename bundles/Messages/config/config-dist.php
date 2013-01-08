@@ -41,7 +41,7 @@ return array(
 			'host'       => 'smtp.gmail.com',
 			'port'       => 465,
 			'username'   => 'email@gmail.com',
-			'password'   => 'StrongPassword',
+			'password'   => 'StrongP4ssword',
 			'encryption' => 'ssl',
 		),
 
