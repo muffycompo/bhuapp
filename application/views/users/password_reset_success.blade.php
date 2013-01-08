@@ -12,9 +12,6 @@
 			<div id="signup-success">
 				<!-- TODO: implement the Email and SMS library to elimate displaying password here -->
 				<p>
-					Password: <strong>{{ $reset_data['password'] }}</strong>
-				</p>
-				<p>
 					We have sent the new password to your GSM number: <strong>{{ $reset_data['gsm_no'] }}</strong> and email address: <strong>{{ strtolower($reset_data['email']) }}</strong>
 				</p>
 				<p>

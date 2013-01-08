@@ -112,9 +112,9 @@ class User extends Basemodel{
 			'password' => Hash::make($pass)
 		);
 		$biodata = array(
-			'surname' => $data['surname'],
-			'firstname' => $data['first_name'],
-			'email_address' => $data['email'],
+			'surname' => ucfirst(strtolower($data['surname'])),
+			'firstname' => ucfirst(strtolower($data['first_name'])),
+			'email_address' => strtolower($data['email']),
 			'gsm_no' => $data['phone'],
 			'formno' => substr($user['username'],6,6)
 		);
@@ -133,7 +133,7 @@ class User extends Basemodel{
 			Pin::update_pin($data['pin_number'], $pin_data);
 			// Create Forms completion status
 			DB::table('statuses')->insert(array('user_id' => $new_user->id));
-			$return_credentials = array('username'=>$user['username'],'password'=>$pass,'email'=>$biodata['email_address'],'gsm_no'=>$biodata['gsm_no']);
+			$return_credentials = array('surname'=>$biodata['surname'], 'firstname'=>$biodata['firstname'], 'username'=>$user['username'],'password'=>$pass,'email'=>$biodata['email_address'],'gsm_no'=>$biodata['gsm_no']);
 			return $return_credentials;
 		} else {
 			return false;
@@ -170,12 +170,20 @@ class User extends Basemodel{
 		if($password){ return true;} else {return false;}
 	}
 
+	public static function teller(){
+		$user_id = Session::get('credentials')['user_id'];
+		$teller = DB::table('pins')->where('user_id', '=', $user_id)->first()->teller;
+		if($teller){ return $teller;} else {return false;}
+	}
+
 	public static function reset_password($data){
 		$id = DB::table('users')->where('username', '=', $data['username'])->first()->id;
 		$user = DB::table('biodata')->where('user_id','=',$id)->first();
 		$password = Bhu::password_gen();
 		// Send Email and SMS
 		$tmp = array(
+			'firstname' => $user->firstname,
+			'surname' => $user->surname,
 			'email' => $user->email_address,
 			'gsm_no' => $user->gsm_no,
 			'password' => $password
@@ -183,7 +191,40 @@ class User extends Basemodel{
 		// Update User Password
 		$update_user = DB::table('users')->where('id', '=', $id)->update(array('password' => Hash::make($password)));
 		if($update_user){ return $tmp;} else { return false;}
+	}
 
+	public static function signup_welcome_email($data){
+		$body = Bhu::signup_email_body($data);
+		$message = Message::to($data['email'], $data['firstname'] . ' ' . $data['surname'])
+			->from('bhuns@binghamuni.edu.ng', 'Bingham University')
+			->reply('no-reply@binghamuni.edu.ng','Do Not Reply')
+			->subject('Applicant Portal Login Credentials')
+			->body($body)
+			// ->attach('path/to/file.extension');
+			->html(true)
+			->send();
+		if($message->was_sent()){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static function password_reset_email($data){
+		$body = Bhu::password_reset_email_body($data);
+		$message = Message::to($data['email'], $data['firstname'] . ' ' . $data['surname'])
+			->from('bhuns@binghamuni.edu.ng', 'Bingham University')
+			->reply('no-reply@binghamuni.edu.ng','Do Not Reply')
+			->subject('Password Reset')
+			->body($body)
+			// ->attach('path/to/file.extension');
+			->html(true)
+			->send();
+		if($message->was_sent()){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

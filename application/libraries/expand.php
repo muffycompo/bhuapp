@@ -61,4 +61,21 @@ class Expand {
 		if(!empty($expand)) {return $expand;} else { return null;}
 	}
 
+	public static function uc($string = ''){
+		return ucwords(strtolower($string));
+	}
+
+	public static function ucf($string = ''){
+		return ucfirst(strtolower($string));
+	}
+
+	public static function upp($string = ''){
+		return strtoupper($string);
+	}
+
+	public static function has_reason($has_reason){
+		$reason = ($has_reason === 0)? 'No' : 'Yes';
+		return $reason;
+	}
+
 }

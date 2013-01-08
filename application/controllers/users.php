@@ -4,8 +4,7 @@ class Users_Controller extends Base_Controller{
 
 	public function __construct(){
 		$this->filter('before', 'csrf')->on('post');
-		$this->filter('before', 'mauth')->except(array('password_reset','signup','signup_success','login'));
-		// DB::profile();
+		$this->filter('before', 'mauth')->except(array('password_reset','signup','signup_success','login','email_test'));
 	}
 
 	public function post_login(){
@@ -27,7 +26,10 @@ class Users_Controller extends Base_Controller{
 		$validate = User::signup_validation(Input::all());
 		if($validate === true){
 			$signup = User::new_user(Input::all());
+			// $signup = true;
 			if($signup !== false){
+				// Send Email
+				// User::signup_welcome_email($signup);
 				return Redirect::to_route('signup_success')->with('message', $signup);
 			} else {
 				return Redirect::to_route('signup')->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
@@ -384,13 +386,35 @@ class Users_Controller extends Base_Controller{
 		if($validate === true){
 			$user = User::reset_password(Input::all());
 			if($user !== false){
-				return View('users.password_reset_success')->with('reset_data', $user);
+				// Send Reset Email
+				User::password_reset_email($user);
+				return View::make('users.password_reset_success')->with('reset_data', $user);
 			} else {
 				return Redirect::to_route('recovery')->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
 			}
 		} else {
 			return Redirect::to_route('recovery')->with_errors($validate)->with_input();
 		}
+	}
+
+	public function get_print_form(){
+		if(Bhu::form_completion() < 4){return Redirect::to_route('dashboard')
+			->with('message', User::message_response('error', 'Your Registration Status is still Incomplete!'));
+		}
+		// Gather Necessary print data
+		$biodata = Biodata::biodata_list();
+		$education = Education::education_list();
+		$parent = Parents::parent_list();
+		$teller = User::teller();
+		$institution = Institution::institution_list();
+		$examination = Examination::examination_list();
+		return View::make('users.print_preview')
+				->with('biodata', $biodata)
+				->with('education', $education)
+				->with('parent', $parent)
+				->with('teller', $teller)
+				->with('institutions', $institution)
+				->with('examinations', $examination);
 	}
 
 	public function get_logout(){

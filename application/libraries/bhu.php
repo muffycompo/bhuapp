@@ -239,4 +239,23 @@ class Bhu {
         if($validate){ return true;} else { return false;}
     }
 
+    public static function signup_email_body($data){
+        $email = View::make('templates.signup_email')
+                ->with('name',$data['surname'] . ' ' . $data['firstname'])
+                ->with('email',$data['email'])
+                ->with('gsm_no',$data['gsm_no'])
+                ->with('password',$data['password'])
+                ->with('username',$data['username']);
+        return $email;
+    }
+
+    public static function password_reset_email_body($data){
+        $email = View::make('templates.password_reset_email')
+                ->with('name',$data['surname'] . ' ' . $data['firstname'])
+                ->with('email',$data['email'])
+                ->with('gsm_no',$data['gsm_no'])
+                ->with('password',$data['password']);
+        return $email;
+    }
+
 }

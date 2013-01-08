@@ -43,10 +43,10 @@
 				<div id="downloadable-forms" class="half_grid">
 					<h2 class="download">Download Forms</h2>
 					<ul>
-						<li class="pdf"><a href="#">Character Assessment Form</a></li>
-						<li class="pdf"><a href="#">Applicant's Confidential Report</a></li>
-						<li class="pdf"><a href="#">Guidance &amp; Councelling Form</a></li>
-						<li class="pdf"><a href="#">UTME/DE Screening Assessment Form</a></li>
+						<li class="pdf">{{ HTML::link_to_route('character_assessment_form','Character Assessment Form','',array('target'=>'_blank')) }}</li>
+						<li class="pdf">{{ HTML::link_to_route('confidential_report','Applicant\'s Confidential Report','',array('target'=>'_blank')) }}</li>
+						<li class="pdf">{{ HTML::link_to_route('guidance_councelling_report','Guidance &amp; Councelling Form','',array('target'=>'_blank')) }}</li>
+						<li class="pdf">{{ HTML::link_to_route('utme_de_assessment_form','UTME/DE Screening Assessment Form','',array('target'=>'_blank')) }}</li>
 					</ul>
 
 				</div><!-- end downloadable-forms -->
