@@ -19,7 +19,7 @@ class Institution extends Basemodel{
 	}
 
 	public static function create_institution($data){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		$institution_data = array(
 			'user_id' => $user_id,
 			'institution_name' => $data['institution'],
@@ -49,7 +49,7 @@ class Institution extends Basemodel{
 	}
 
 	public static function institution_list(){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		$institution_get_data = User::find($user_id)->institution()->order_by('id', 'asc')->get();
 		return $institution_get_data;
 	}

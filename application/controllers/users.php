@@ -11,8 +11,7 @@ class Users_Controller extends Base_Controller{
 		$validate = User::user_validation(Input::all());
 		if($validate === true){
 			$login = User::login_user(Input::all());
-			if($login !== false){
-				Session::put('credentials',$login);
+			if($login){
 				return Redirect::to_route('dashboard');
 			} else {
 				return Redirect::to_route('home')->with('message', User::message_response('error', 'The Username/Password combination is invalid!'))->with_input();
@@ -29,7 +28,9 @@ class Users_Controller extends Base_Controller{
 			// $signup = true;
 			if($signup !== false){
 				// Send Email
-				// User::signup_welcome_email($signup);
+				User::signup_welcome_email($signup);
+                // Send SMS
+                Bhu::signup_sms($signup);
 				return Redirect::to_route('signup_success')->with('message', $signup);
 			} else {
 				return Redirect::to_route('signup')->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
@@ -97,7 +98,7 @@ class Users_Controller extends Base_Controller{
 		$validate = Education::education_validation(Input::all());
 		if($validate === true){
 			$education = Education::create_education(Input::all());
-			if($education === true){
+			if($education){
 				return Redirect::to_route('forms')
 					->with('message', User::message_response('success', 'Educational Information has been saved!'));
 			} elseif($education == 1) {
@@ -388,6 +389,8 @@ class Users_Controller extends Base_Controller{
 			if($user !== false){
 				// Send Reset Email
 				User::password_reset_email($user);
+                // Send SMS
+                Bhu::reset_password_sms($user);
 				return View::make('users.password_reset_success')->with('reset_data', $user);
 			} else {
 				return Redirect::to_route('recovery')->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();

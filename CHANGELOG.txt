@@ -1,9 +1,16 @@
 CHANGELOG
-=================
-Bhu App alpha v0.2
-==================
+==========
+Bhu App
+========
+
+v0.2 alpha
+==========
 - Made a lot of CSS fixes for IE6+
 - Added DD_belatedPNG.js to fix IE6 .PNG transparency issues
 - Fixed Upload Bug producing unhandled exception when no document was uploaded
 - Added Relationship Dropdown to reduce user induced errors
 - Added ability to Select "Awaiting JAMB result" for candidates awaiting their JAMB result
+
+v0.4 alpha
+==========
+- 

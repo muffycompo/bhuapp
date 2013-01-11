@@ -17,7 +17,7 @@ class Examination extends Basemodel{
 	}
 
 	public static function create_examination($data){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		$examination_data = array(
 			'user_id' => $user_id,
 			'exam_type_id' => $data['exam_type'],
@@ -50,7 +50,7 @@ class Examination extends Basemodel{
 	}
 
 	public static function examination_list(){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		$examination_get_data = User::find($user_id)->examination()->order_by('id', 'asc')->get();
 		return $examination_get_data;
 	}

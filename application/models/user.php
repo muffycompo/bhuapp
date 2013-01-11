@@ -82,24 +82,31 @@ class User extends Basemodel{
 
 	public static function login_user($data){
 		$user = array(
-			'username' => $data['username'],
+			'username' => trim($data['username']),
 			'password' => $data['password']
 		);
 		if(Auth::attempt($user)){
 			// Get User details and store in SESSION
 			$user_auth = Auth::user();
 			$user_biodata = self::find($user_auth->id)->biodata()->first();
-			$session_array = array(
+			// Return details
+			$return = array(
 				'user_id' => $user_auth->id,
 				'username' => $user_auth->username,
-				'formno' => $user_biodata->formno
-			);
+				'formno' => $user_biodata->formno,
+				'firstname' => $user_biodata->firstname,
+				'surname' => $user_biodata->firstname,
+				'othernames' => $user_biodata->othernames
+				);
+			Session::put('user_id', $user_auth->id);
+			Session::put('username', $user_auth->username);
+			Session::put('formno', $user_biodata->formno);
 			Session::put('firstname', $user_biodata->firstname);
 			Session::put('surname', $user_biodata->surname);
 			Session::put('othernames', $user_biodata->othernames);
 			// Check if the user wants to be remembered
 			if(isset($data['remember']) && $data['remember'] == 1) { Auth::login($user_auth->id, true);}
-			return $session_array;
+			return $return;
 		} else {
 			return false;
 		}
@@ -145,7 +152,7 @@ class User extends Basemodel{
 	}
 
 	public static function documents(){
-		$username = Session::get('credentials')['username'];
+		$username = Session::get('username');
 		$files = Bhu::document_list($username);
 		$file = array();
 		foreach($files as $k => $v){
@@ -155,23 +162,23 @@ class User extends Basemodel{
 	}
 
 	public static function documents_path(){
-		$username = Session::get('credentials')['username'];
+		$username = Session::get('username');
 		return Bhu::docs_path($username);
 	}
 
 	public static function remove_document($document){
-		$username = Session::get('credentials')['username'];
+		$username = Session::get('username');
 		return Bhu::remove_docs($username, $document);
 	}
 
 	public static function change_current_password($data){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		$password = DB::table('users')->where('id', '=', $user_id)->update(array('password' => Hash::make($data['password'])));
 		if($password){ return true;} else {return false;}
 	}
 
 	public static function teller(){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		$teller = DB::table('pins')->where('user_id', '=', $user_id)->first()->teller;
 		if($teller){ return $teller;} else {return false;}
 	}
@@ -195,35 +202,31 @@ class User extends Basemodel{
 
 	public static function signup_welcome_email($data){
 		$body = Bhu::signup_email_body($data);
-		$message = Message::to($data['email'], $data['firstname'] . ' ' . $data['surname'])
-			->from('bhuns@binghamuni.edu.ng', 'Bingham University')
-			->reply('no-reply@binghamuni.edu.ng','Do Not Reply')
-			->subject('Applicant Portal Login Credentials')
-			->body($body)
-			// ->attach('path/to/file.extension');
-			->html(true)
-			->send();
-		if($message->was_sent()){
-			return true;
-		} else {
+		$mailer = IoC::resolve('phpmailer');
+		$mailer->Subject = 'Applicant Portal Login Credentials';
+		$mailer->MsgHTML($body);
+		$mailer->AddAddress($data['email'], $data['firstname'] . ' ' . $data['surname']);
+		$mailer->AddReplyTo('no-reply@binghamuni.edu.ng','Do Not Reply');
+		//$mailer->AddAttachment('path/to/file.extension');
+		if(!$mailer->send()){
 			return false;
+		} else {
+			return true;
 		}
 	}
 
 	public static function password_reset_email($data){
 		$body = Bhu::password_reset_email_body($data);
-		$message = Message::to($data['email'], $data['firstname'] . ' ' . $data['surname'])
-			->from('bhuns@binghamuni.edu.ng', 'Bingham University')
-			->reply('no-reply@binghamuni.edu.ng','Do Not Reply')
-			->subject('Password Reset')
-			->body($body)
-			// ->attach('path/to/file.extension');
-			->html(true)
-			->send();
-		if($message->was_sent()){
-			return true;
-		} else {
+		$mailer = IoC::resolve('phpmailer');
+		$mailer->Subject = 'Password Reset';
+		$mailer->MsgHTML($body);
+		$mailer->AddAddress($data['email'], $data['firstname'] . ' ' . $data['surname']);
+		$mailer->AddReplyTo('no-reply@binghamuni.edu.ng','Do Not Reply');
+		//$mailer->AddAttachment('path/to/file.extension');
+		if(!$mailer->send()){
 			return false;
+		} else {
+			return true;
 		}
 	}
 

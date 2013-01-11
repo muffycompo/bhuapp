@@ -26,7 +26,7 @@ class Education extends Basemodel{
 	}
 	
 	public static function create_education($data){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		if(self::check_education_exists($user_id)){
 			// Update Education Record
 			$update_data = array(
@@ -70,7 +70,7 @@ class Education extends Basemodel{
 	}
 
 	public static function education_list(){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		return User::find($user_id)->education()->first();
 	}
 

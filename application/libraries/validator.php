@@ -10,7 +10,7 @@ class Validator extends Laravel\Validator{
     }
 
     public static function validate_current_password($attribute, $value){
-        $user_id = Session::get('credentials')['user_id'];
+        $user_id = Session::get('user_id');
         $current_password = DB::table('users')->where('id', '=', $user_id)->first()->password;
         if(Hash::check($value, $current_password)){ return true; } else { return false;}
     }

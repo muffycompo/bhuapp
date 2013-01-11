@@ -56,10 +56,34 @@ class Expand {
 		if(!empty($expand)) {return $expand;} else { return null;}
 	}
 	
+	public static function relationship($id){
+		$expand = DB::table('relationships')->where('id','=',$id)->first()->relationship_name;
+		if(!empty($expand)) {return $expand;} else { return null;}
+	}
+	
 	public static function bank($id){
 		$expand = DB::table('banks')->where('id','=',$id)->first()->bank_name;
 		if(!empty($expand)) {return $expand;} else { return null;}
 	}
+
+    // TODO: Replace this with a more elegant(database related) code later :)
+    public static function faculty($id){
+        if($id == 3 || $id == 4 || $id == 5 || $id == 7 || $id == 8 || $id == 13 || $id == 14 || $id == 16 || $id == 19 || $id == 20){
+            return 'Science &amp; Technology';
+        }
+        elseif($id == 2 || $id == 12 || $id == 15){
+            return 'College of Health Sciences';
+        }
+        elseif($id == 1 || $id == 6 || $id == 17 || $id == 18 || $id == 9){
+            return 'Social &amp; Management Sciences';
+        }
+        elseif($id == 10 || $id == 11){
+            return 'Hummanities';
+        }
+        else{
+            return '';
+        }
+    }
 
 	public static function uc($string = ''){
 		return ucwords(strtolower($string));

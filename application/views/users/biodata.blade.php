@@ -143,7 +143,7 @@
 			<p>
 				{{ Form::label('pastor_gsm','Pastor Number:') }}
 				{{ Form::text('pastor_gsm',$biodata->pastor_gsm_no, array('id'=>'pastor_gsm','class'=>'inputStyle','maxlength'=>'11')) }}
-				<!-- <em>Enter your surname name.</em> -->
+                {{ $errors->first('pastor_gsm','<em class="emsg">:message</em>') }}
 			</p>
 		
 			<p>

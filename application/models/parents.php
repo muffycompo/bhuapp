@@ -12,6 +12,7 @@ class Parents extends Basemodel{
 		'home_address' => 'required',
 		'relationship' => 'required',
 		'gsm_no' => 'required|numeric|gsm_number',
+        'email' => 'email',
 		'parent_occupation' => 'required'
 	);
 
@@ -20,7 +21,7 @@ class Parents extends Basemodel{
 	}
 
 	public static function create_parent($data){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		if(self::check_parent_exists($user_id)){
 			// Update Education Record
 			$update_data = array(
@@ -70,7 +71,7 @@ class Parents extends Basemodel{
 	}
 
 	public static function parent_list(){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		return User::find($user_id)->parents()->first();
 	}
 

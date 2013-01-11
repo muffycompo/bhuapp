@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Print Preview - BHU Applicant Portal</title>
+	<title>Print Completed Form</title>
 	{{ HTML::style('/css/print_style.css') }}
 	<!--[if lt IE 7 ]>	<html class="ie6"> <![endif]-->
 	<!--[if lt IE 7 ]>
@@ -27,7 +27,7 @@
 			<table class="institutions_attended">
 				<tbody>
 					<tr>
-						<td><br /><br /><br /><span>Username: <strong>{{ strtolower(Session::get('credentials')['username']); }}</strong><br /><br />
+						<td><br /><br /><br /><span>Username: <strong>{{ strtolower(Session::get('username')) }}</strong><br /><br />
 						Teller Number: <strong>{{ Expand::upp($teller) }}</strong><br /><br />
 						Form Number: <strong>{{ $biodata->formno }}</strong>
 						</span></td>
@@ -154,7 +154,7 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">College / Faculty:</span></td>
-					<td class="longInput"><span>{{ $education->first_choice_id }}</span></td>
+					<td class="longInput"><span>{{ Expand::faculty($education->first_choice_id) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Department:</span></td>
@@ -169,7 +169,7 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">College / Faculty:</span></td>
-					<td class="longInput"><span>{{ $education->second_choice_id }}</span></td>
+					<td class="longInput"><span>{{ Expand::faculty($education->second_choice_id) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Department:</span></td>
@@ -269,7 +269,7 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Relationship:</span></td>
-					<td class="longInput"><span>{{ Expand::ucf($parent->relationship) }}</span></td>
+					<td class="longInput"><span>{{ Expand::ucf(Expand::relationship($parent->relationship)) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Mobile Phone No:</span></td>

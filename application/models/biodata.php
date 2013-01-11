@@ -12,6 +12,7 @@ class Biodata extends Basemodel{
 		'first_name' => 'required',
 		'email' => 'required|email',
 		'gsm_no' => 'required|numeric|gsm_number',
+        'pastor_gsm' => 'numeric|gsm_number',
 		'home_address' => 'required',
 		'day' => 'required|numeric',
 		'month' => 'required|numeric',
@@ -23,7 +24,7 @@ class Biodata extends Basemodel{
 	}
 
 	public static function biodata_list(){
-		$user_id = Session::get('credentials')['user_id'];
+		$user_id = Session::get('user_id');
 		return User::find($user_id)->biodata()->first();
 	}
 
