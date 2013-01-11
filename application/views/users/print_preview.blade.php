@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Home / Mailing Address:</span></td>
-					<td class="longInput"><span>{{ Expand::ucf($biodata->home_address) }}</span></td>
+					<td class="longInput"><span>{{ Expand::uc($biodata->home_address) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Mobile Phone No:</span></td>
