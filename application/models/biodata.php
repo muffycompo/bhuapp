@@ -8,8 +8,8 @@ class Biodata extends Basemodel{
 	}
 
 	public static $biodata_rules = array(
-		'surname' => 'required',
-		'first_name' => 'required',
+		'surname' => 'required|alpha',
+		'first_name' => 'required|alpha',
 		'email' => 'required|email',
 		'gsm_no' => 'required|numeric|gsm_number',
         'pastor_gsm' => 'numeric|gsm_number',

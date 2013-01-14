@@ -2,7 +2,10 @@
 class Bhu {
 	
     public static function generate_username($firstname, $surname){
-		return Str::lower(substr($firstname, 0, 3) . substr($surname, 0, 3) . self::password_gen());
+        $char = Str::lower(substr($firstname, 0, 3) . substr($surname, 0, 3));
+        $char = preg_replace("/'/", 'm', $char); // Remove unwanted characters
+        if(strlen($char) == 6){return  $char. self::password_gen();}
+		
 	}
 
 	public static function password_gen($chars_min=6, $chars_max=6, $use_upper_case=false, $include_numbers=false, $include_special_chars=false){
@@ -165,13 +168,13 @@ class Bhu {
         if($upload_id == 1){
             $user_upload_dir = path('public') . DS .'/uploads/' . $username . '/passport';
             $ext = explode('.', File::extension($data['upload_passport']['name']));
-            $filename = $username. '.' .$ext[0];
+            $filename = $username. '.' .$ext[0]; //php fileinfo dependent
             // Upload file to folder
             $upload = Input::upload('upload_passport', $user_upload_dir, $filename);
             // Resize Passport to 105px X 115px
             $resize = Resizer::open($user_upload_dir . '/' . $filename)
                     ->resize(105, 115, 'exact' )
-                    ->save($user_upload_dir . '/' . $filename, 90);
+                    ->save($user_upload_dir . '/' . $filename, 95);
 
         } else {
             $user_upload_dir = path('public') . DS .'/uploads/' . $username . '/documents';
@@ -265,10 +268,22 @@ class Bhu {
     }
 
     public static function reset_password_sms($data){
-        $txt = 'You have requested for a password reset on Bingham University applicant portal. Your new password is: ' . $data['password'];
+        $txt = 'Hello ' .$data['firstname']. ' ' .$data['surname']. ', your password has been reset to: ' . $data['password'];
         $receiver = $data['gsm_no'];
         // Call SMS bundle
         Sms::send($txt, $receiver);
     }
 
+    public static function trim_it($input_value){
+        if(is_array($input_value)){
+            $inputs = $input_value;
+            $trimmed_inputs = array();
+            foreach($input_value as $key => $value){
+            $trimmed_inputs[$key] = trim($value); 
+            }
+            return $trimmed_inputs;
+        } else {
+            return trim($input_value);
+        }
+    } 
 }

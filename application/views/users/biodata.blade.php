@@ -168,7 +168,7 @@
 				{{ Form::label('former_names','Former Names:') }}
 				{{ Form::text('former_names',$biodata->former_name, array('id'=>'former_names','class'=>'inputStyle')) }}
 				<em>Used for any other change of name.</em>
-			</p>
+			</p>		
 
 			<p>
 				<div class="distanceLeft">
@@ -190,6 +190,14 @@
 					{{ Form::label('if_denied_admission','I have been denied admission before.') }}
 				</div>
 			</p>
+
+			<p>
+				<div class="distanceLeft">
+					{{ Form::radio('has_reason',0,($biodata->has_reason == 0)? true : false,array('class'=>'inputStyleChk','id'=>'if_has_no_reason')) }}
+					{{ Form::label('if_has_no_reason','None of the above.') }}
+				</div>
+			</p>
+
 			<p>
 				{{ Form::label('reason','Reason:') }}
 				{{ Form::textarea('reason',$biodata->reason, array('id'=>'reason','class'=>'inputStyleTa')) }}

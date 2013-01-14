@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Bingham University - v1.0.0 beta</title>
-	{{ HTML::style('/css/960_12_col.css') }}
+	<title>Bingham University - v1.0.1 beta</title>
 	{{ HTML::style('/css/style.css') }}
 	<!--[if lt IE 7 ]>	<html class="ie6"> <![endif]-->
 	<!--[if lt IE 7 ]>
@@ -23,7 +22,6 @@
 				<li>{{ HTML::link('http://www.binghamuni.edu.ng','University Website', array('title'=> 'Bingham University Website','target'=>'_blank')) }}</li>
 				<li>{{ HTML::link('#','Registration Guide', array('title' => 'Guide to Registration')) }}</li>
 			</ul>
-
 		</div>
 
 	</div>
@@ -32,6 +30,7 @@
 		<!-- Yield sections from Views -->
 		@yield('content');
 	</div><!-- end mainContent -->
+	
 	<div id="footer">
 		<p>Copyright &copy; {{ date('Y') }} - All rights reserved - {{ HTML::link('http://www.binghamuni.edu.ng','Bingham University', array('target'=>'_blank')) }}</p>
 	</div>

@@ -23,7 +23,8 @@ class Validator extends Laravel\Validator{
     public static function validate_exam_number($attribute, $value){
         return Bhu::check_exam_number($value);
     }
-  public static function validate_gsm_number($attribute, $value){
+
+    public static function validate_gsm_number($attribute, $value){
         return Bhu::check_gsm_number($value);
     }
 

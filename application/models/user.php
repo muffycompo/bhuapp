@@ -27,8 +27,8 @@ class User extends Basemodel{
 	);
 
 	public static $signup_rules = array(
-		'surname' => 'required',
-		'first_name' => 'required',
+		'surname' => 'required|alpha',
+		'first_name' => 'required|alpha',
 		'email' => 'required|email',
 		'phone' => 'required|numeric|gsm_number',
 		'pin_number' => 'required|numeric|pin',

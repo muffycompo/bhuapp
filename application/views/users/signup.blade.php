@@ -60,7 +60,7 @@
 
 				<p>
 					<label for="pin_number">PIN Number: <span class="requiredField">*</span></label>
-					{{ Form::text('pin_number',Input::old('pin_number'), array('id'=>'pin_number','class'=>'inputStyle','maxlength'=>'12')) }}
+					{{ Form::mpassword('pin_number',Input::old('pin_number'), array('id'=>'pin_number','class'=>'inputStyle','maxlength'=>'12')) }}
 					{{ $errors->first('pin_number','<em class="emsg">:message</em>') }}
 				</p>
 

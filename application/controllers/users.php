@@ -70,7 +70,7 @@ class Users_Controller extends Base_Controller{
 	public function post_biodata(){
 		$validate = Biodata::biodata_validation(Input::all());
 		if($validate === true){
-			if(Biodata::update_biodata(Input::all())){
+			if(Biodata::update_biodata(Bhu::trim_it(Input::all()))){
 				return Redirect::to_route('forms')->with('message', User::message_response('success', 'Personal Information has been saved!'));
 			} else {
 				return Redirect::to_route('forms')->with('message', User::message_response('error', 'An error has occured, please try again!'));
@@ -97,25 +97,25 @@ class Users_Controller extends Base_Controller{
 	public function post_education(){
 		$validate = Education::education_validation(Input::all());
 		if($validate === true){
-			$education = Education::create_education(Input::all());
-			if($education){
+			$education = Education::create_education(Bhu::trim_it(Input::all()));
+			if($education === true){
 				return Redirect::to_route('forms')
 					->with('message', User::message_response('success', 'Educational Information has been saved!'));
 			} elseif($education == 1) {
-				return Redirect::to_route('education')
+				return Redirect::back()
 					->with('message', User::message_response('error', 'No Result has been added yet!'))->with_input();
 			} elseif($education == 2) {
-				return Redirect::to_route('education')
+				return Redirect::back()
 					->with('message', User::message_response('error', 'No Institution has been added yet!'))->with_input();
 			} elseif($education == 3) {
 				return Redirect::to_route('forms')
 					->with('message', User::message_response('error', 'No changes saved even though Institution/Result may have been updated!'))->with_input();
 			} else {
-				return Redirect::to_route('education')
+				return Redirect::back()
 					->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
 			}
 		} else {
-			return Redirect::to_route('education')->with_errors($validate)->with_input();
+			return Redirect::back()->with_errors($validate)->with_input();
 		}
 	}
 
@@ -131,15 +131,15 @@ class Users_Controller extends Base_Controller{
 	public function post_parents(){
 		$validate = Parents::parent_validation(Input::all());
 		if($validate === true){
-			if(Parents::create_parent(Input::all())){
+			if(Parents::create_parent(Bhu::trim_it(Input::all()))){
 				return Redirect::to_route('forms')
 					->with('message', User::message_response('success', 'Parent/Guardian Information has been saved!'));
 			} else {
-				return Redirect::to_route('parents')
+				return Redirect::back()
 					->with('message', User::message_response('error', 'An error has occured, please try again!'))->with_input();
 			}
 		} else {
-			return Redirect::to_route('parents')->with_errors($validate)->with_input();
+			return Redirect::back()->with_errors($validate)->with_input();
 		}
 	}
 
@@ -165,12 +165,12 @@ class Users_Controller extends Base_Controller{
 			$upload = User::uploads($upload_id, Input::all());
 			if($upload !== false){
 				if($upload_id == 1) { Bhu::update_form_status(4); }
-				return Redirect::to_route('upload')->with('message', User::message_response('success', 'The file has been uploaded!'));
+				return Redirect::back()->with('message', User::message_response('success', 'The file has been uploaded!'));
 			} else {
-				return Redirect::to_route('upload')->with('message', User::message_response('error', 'An error has occured, please try again!'));
+				return Redirect::back()->with('message', User::message_response('error', 'An error has occured, please try again!'));
 			}
 		} else {
-			return Redirect::to_route('upload')->with_errors($validate)->with_input();
+			return Redirect::back()->with_errors($validate)->with_input();
 		}
 	}
 
@@ -197,11 +197,11 @@ class Users_Controller extends Base_Controller{
 	public function post_add_institution(){
 		$validate = Institution::institution_validation(Input::all());
 		if($validate === true){
-			if(Institution::create_institution(Input::all())){
-				return Redirect::to_route('add_institution')
+			if(Institution::create_institution(Bhu::trim_it(Input::all()))){
+				return Redirect::back()
 					->with('message', User::message_response('success', 'Institution has been added!'))->with_input();
 			} else {
-				return Redirect::to_route('add_institution')
+				return Redirect::back()
 					->with('message', User::message_response('error', 'You already have four(4) Institutions added!'))->with_input();
 			}
 		} else {
@@ -217,15 +217,15 @@ class Users_Controller extends Base_Controller{
 	public function post_add_result(){
 		$validate = Examination::examination_validation(Input::all());
 		if($validate === true){
-			if(Examination::create_examination(Input::all())){
-				return Redirect::to_route('add_result')
+			if(Examination::create_examination(Bhu::trim_it(Input::all()))){
+				return Redirect::back()
 					->with('message', User::message_response('success', 'Result has been added!'))->with_input();
 			} else {
-				return Redirect::to_route('add_result')
+				return Redirect::back()
 					->with('message', User::message_response('error', 'You already have eighteen(18) results added!'))->with_input();
 			}
 		} else {
-			return Redirect::to_route('add_result')->with_errors($validate)->with_input();
+			return Redirect::back()->with_errors($validate)->with_input();
 		}
 	}
 
@@ -250,7 +250,7 @@ class Users_Controller extends Base_Controller{
 		$id = Input::get('id');
 		$redirect_id = Input::get('redirect_id');
 		if($validate === true){
-			if(Institution::update_institution(Input::all())){
+			if(Institution::update_institution(Bhu::trim_it(Input::all()))){
 				switch ($redirect_id) {
 					case '1':
 						return Redirect::to_route('education')
@@ -291,7 +291,7 @@ class Users_Controller extends Base_Controller{
 		$id = Input::get('id');
 		$redirect_id = Input::get('redirect_id');
 		if($validate === true){
-			if(Examination::update_examination(Input::all())){
+			if(Examination::update_examination(Bhu::trim_it(Input::all()))){
 				switch ($redirect_id) {
 					case '1':
 						return Redirect::to_route('education')
@@ -370,7 +370,7 @@ class Users_Controller extends Base_Controller{
 	public function post_password_change(){
 		$validate = User::password_validation(Input::all());
 		if($validate === true){
-			if(User::change_current_password(Input::all())){
+			if(User::change_current_password(Bhu::trim_it(Input::all()))){
 				return Redirect::to_route('dashboard')
 				->with('message', User::message_response('success', 'Password has been changed and will be active in the next login!'));
 			} else {
@@ -385,7 +385,7 @@ class Users_Controller extends Base_Controller{
 	public function post_password_reset(){
 		$validate = User::password_reset_validation(Input::all());
 		if($validate === true){
-			$user = User::reset_password(Input::all());
+			$user = User::reset_password(Bhu::trim_it(Input::all()));
 			if($user !== false){
 				// Send Reset Email
 				User::password_reset_email($user);

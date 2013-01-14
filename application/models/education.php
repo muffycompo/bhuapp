@@ -27,7 +27,7 @@ class Education extends Basemodel{
 	
 	public static function create_education($data){
 		$user_id = Session::get('user_id');
-		if(self::check_education_exists($user_id)){
+		if(self::check_education_exists($user_id) && self::check_institutions_exists($user_id) && self::check_exams_exists($user_id)){
 			// Update Education Record
 			$update_data = array(
 				'first_choice_id' => $data['first_choice'],
@@ -35,13 +35,17 @@ class Education extends Basemodel{
 				'jamb_number' => $data['jamb_number'],
 				'jamb_score' => $data['jamb_score']
 			);
-			$education = DB::table('education')->where('user_id','=',$user_id)->update($update_data);
-			if($education){
+			if(! self::check_institutions_exists($user_id)){ return 2; }
+			else if(! self::check_exams_exists($user_id)){ return 1; }
+			else{
+				$education = DB::table('education')->where('user_id','=',$user_id)->update($update_data);
+				if($education){
 				Bhu::update_form_status(2);
 				return true;
-			} else { 
+				} else { 
 				return 3;
-			}
+				}
+			}		
 		} else {
 			if(self::check_institutions_exists($user_id)){
 				if(self::check_exams_exists($user_id)){

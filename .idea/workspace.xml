@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="afe12dde-2e6f-476c-8913-b041ce194794" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/closure-compiler/vendor/compiler.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/libraries/input.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/closure-compiler/closure_compiler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/closure-compiler/config/closure-compiler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/closure-compiler/license.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/closure-compiler/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/closure-compiler/start.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/closure-compiler/vendor/COPYING" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/closure-compiler/vendor/README" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/base.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/controllers/examples.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/models/exampleform.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/start.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/tests/base.test.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/views/index.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/views/multi_page_example_one.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/views/multi_page_example_review.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/views/multi_page_example_two.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/views/simple_example.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/form-base-model/views/simple_example_review.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/phpmailer/config/phpmailer-dist.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bundles/sms/config/config-dist.php" />
-      <change type="DELETED" beforePath="C:\wamp\www\bhuapp\bundles\phpmailer\config\phpmailer.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\bhuapp\bundles\sms\config\config.php" afterPath="" />
+    <list default="true" id="afe12dde-2e6f-476c-8913-b041ce194794" name="Default" comment="Installed form-base-model bundle for added form input support">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bhuapp.iws" />
@@ -140,10 +115,6 @@
               <option name="myItemId" value="bhuapp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bhuapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -217,7 +188,15 @@
       <created>1357934079882</created>
       <updated>1357934079882</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Installed form-base-model bundle for added form input support">
+      <created>1357934323687</created>
+      <updated>1357934323687</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Installed form-base-model bundle for added form input support">
+      <created>1357934391787</created>
+      <updated>1357934391787</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -244,12 +223,11 @@
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288364" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6509275" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.78246206" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.60033727" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23030303" sideWeight="0.34907252" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23787878" sideWeight="0.21753794" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6391231" sideWeight="0.49772727" order="7" side_tool="true" content_ui="tabs" />
@@ -259,6 +237,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32715008" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -300,7 +279,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Extended Input::get() method to always trim input form values." />
+    <option name="LAST_COMMIT_MESSAGE" value="Installed form-base-model bundle for added form input support" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -315,6 +294,7 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Added an SMS bundle and refactored users controller" />
     <MESSAGE value="Extended Input::get() method to always trim input form values." />
+    <MESSAGE value="Installed form-base-model bundle for added form input support" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -372,46 +352,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/application.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="175" column="42" selection-start="5866" selection-end="5866" vertical-scroll-proportion="0.84415585">
-          <folding />
-        </state>
+        <state line="175" column="42" selection-start="5866" selection-end="5866" vertical-scroll-proportion="0.84415585" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/laravel/input.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="5" selection-start="812" selection-end="1573" vertical-scroll-proportion="0.7140078">
-          <folding />
-        </state>
+        <state line="79" column="5" selection-start="812" selection-end="1573" vertical-scroll-proportion="0.7140078" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/expand.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-4.1558933">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-4.1558933" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/users/print_preview.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="61" selection-start="3164" selection-end="3164" vertical-scroll-proportion="0.26615968">
-          <folding>
-            <marker date="1357932921518" expanded="true" signature="272:567" placeholder="..." />
-          </folding>
-        </state>
+        <state line="77" column="61" selection-start="3164" selection-end="3164" vertical-scroll-proportion="0.26615968" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/input.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1018" selection-end="1018" vertical-scroll-proportion="0.48051947">
-          <folding />
-        </state>
+        <state line="40" column="0" selection-start="1018" selection-end="1018" vertical-scroll-proportion="0.48051947" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
   </component>
