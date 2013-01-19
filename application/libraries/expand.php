@@ -98,7 +98,7 @@ class Expand {
 	}
 
 	public static function has_reason($has_reason){
-		$reason = ($has_reason === 0)? 'No' : 'Yes';
+		$reason = ($has_reason == 0)? 'No' : 'Yes';
 		return $reason;
 	}
 

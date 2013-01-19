@@ -27,8 +27,8 @@
 			<table class="institutions_attended">
 				<tbody>
 					<tr>
-						<td><br /><br /><br /><span>Username: <strong>{{ strtolower(Session::get('username')) }}</strong><br /><br />
-						Teller Number: <strong>{{ Expand::upp($teller) }}</strong><br /><br />
+						<td><br /><br /><br /><span>Username: <strong>{{ Str::lower(Session::get('username')) }}</strong><br /><br />
+						Teller Number: <strong>{{ Str::upper($teller) }}</strong><br /><br />
 						Form Number: <strong>{{ $biodata->formno }}</strong>
 						</span></td>
 						<td style="text-align: center;"><img src="{{ URL::base() }}/img/print_preview.jpg" alt="header"></td>
@@ -63,19 +63,19 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Surname:</span></td>
-					<td class="longInput"><span>{{ Expand::ucf($biodata->surname) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($biodata->surname) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">First Name:</span></td>
-					<td class="longInput"><span>{{ Expand::ucf($biodata->firstname) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($biodata->firstname) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Other Names:</span></td>
-					<td class="longInput"><span>{{ Expand::ucf($biodata->othernames) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($biodata->othernames) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Home / Mailing Address:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($biodata->home_address) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($biodata->home_address) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Mobile Phone No:</span></td>
@@ -83,7 +83,7 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Email Address:</span></td>
-					<td class="longInput"><span>{{ strtolower($biodata->email_address) }}</span></td>
+					<td class="longInput"><span>{{ Str::lower($biodata->email_address) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Date of Birth:</span></td>
@@ -112,11 +112,11 @@
 			<tbody>
 				<tr>
 					<td class="longInput"><span class="print_label">Pastor's Name:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($biodata->pastor_name) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($biodata->pastor_name) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Pastor's Address:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($biodata->pastor_address) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($biodata->pastor_address) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Pastor's Phone No:</span></td>
@@ -132,11 +132,11 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span><strong>Maiden Name:</strong> (Married women only)</span> </td>
-					<td class="longInput"><span>{{ Expand::uc($biodata->maiden_name) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($biodata->maiden_name) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span><strong>Former Names:</strong> (For any other change of name)</span></td>
-					<td class="longInput"><span>{{ Expand::uc($biodata->former_name) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($biodata->former_name) }}</span></td>
 				</tr>
 			</tbody>
 		</table>
@@ -195,10 +195,10 @@
 			<tbody>
 				@foreach($institutions as $institution)
 					<tr>
-						<td class="longInput"><span>{{ Expand::uc($institution->institution_name) }}</span></td>
+						<td class="longInput"><span>{{ Str::title($institution->institution_name) }}</span></td>
 						<td class="smallInput"><span>{{ $institution->from_year }}</span></td>
 						<td class="smallInput"><span>{{ $institution->to_year }}</span></td>
-						<td class="longInput_l"><span>{{ Expand::upp($institution->qualification) }}</span></td>
+						<td class="longInput_l"><span>{{ Str::upper($institution->qualification) }}</span></td>
 					</tr>
 				@endforeach
 			</tbody>
@@ -208,22 +208,22 @@
 			<tbody>
 				<tr>
 					<td class="longInput"><span class="print_label">JAMB Registration No:</span></td>
-					<td class="longInput">{{ Expand::upp($education->jamb_number) }}</td>
+					<td class="longInput">{{ Str::upper($education->jamb_number) }}</td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">JAMB Score:</span></td>
-					<td class="longInput">{{ Expand::upp($education->jamb_score) }}</td>
+					<td class="longInput">{{ Str::upper($education->jamb_score) }}</td>
 				</tr>
 				<tr>
 					<td class="longInput" colspan="2" style="background-color: #EFEFEF;"><span class="print_label">IMPORTANT NOTE:</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Have you ever been suspended, expelled from, or refused admission to any school?</span></td>
-					<td class="longInput">{{ Expand::ucf(Expand::has_reason($biodata->has_reason)) }}</td>
+					<td class="longInput">{{ Str::title(Expand::has_reason($biodata->has_reason)) }}</td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label"> If Yes, for how long and why?</span></td>
-					<td class="longInput">{{ Expand::uc($biodata->reason) }}</td>
+					<td class="longInput">{{ Str::title($biodata->reason) }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -241,11 +241,11 @@
 			<tbody>
 				@foreach($examinations as $examination)
 				<tr>
-					<td class="selectInputExam"><span>{{ Expand::upp(Expand::exam_type($examination->exam_type_id)) }}</span></td>
+					<td class="selectInputExam"><span>{{ Str::upper(Expand::exam_type($examination->exam_type_id)) }}</span></td>
 					<td class="smallInput"><span>{{ $examination->exam_date }}</span></td>
-					<td class="longInputExamNo"><span>{{ Expand::upp($examination->exam_number) }}</span></td>
-					<td class="selectInputSubject"><span>{{ Expand::uc(Expand::exam_subject($examination->exam_subject_id)) }}</span></td>
-					<td class="selectInputGrade"><span>{{ Expand::upp(Expand::exam_grade($examination->exam_grade_id)) }}</span></td>
+					<td class="longInputExamNo"><span>{{ Str::upper($examination->exam_number) }}</span></td>
+					<td class="selectInputSubject"><span>{{ Str::title(Expand::exam_subject($examination->exam_subject_id)) }}</span></td>
+					<td class="selectInputGrade"><span>{{ Str::upper(Expand::exam_grade($examination->exam_grade_id)) }}</span></td>
 				</tr>
 				@endforeach
 			</tbody>
@@ -257,19 +257,19 @@
 			<tbody>
 				<tr>
 					<td class="longInput"><span class="print_label">Parent / Guardian Name:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($parent->parent_name) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($parent->parent_name) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Parent / Guardian Home Address:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($parent->parent_home_address) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($parent->parent_home_address) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Parent / Guardian Office  Address:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($parent->parent_office_address) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($parent->parent_office_address) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Relationship:</span></td>
-					<td class="longInput"><span>{{ Expand::ucf(Expand::relationship($parent->relationship)) }}</span></td>
+					<td class="longInput"><span>{{ Str::title(Expand::relationship($parent->relationship)) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Mobile Phone No:</span></td>
@@ -277,19 +277,19 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Email Address:</span></td>
-					<td class="longInput"><span>{{ strtolower($parent->parent_email_address) }}</span></td>
+					<td class="longInput"><span>{{ Str::lower($parent->parent_email_address) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Occupation:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($parent->parent_occupation) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($parent->parent_occupation) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Sponsor's Name:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($parent->sponsor_name) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($parent->sponsor_name) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Sponsor's Home Address:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($parent->sponsor_address) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($parent->sponsor_address) }}</span></td>
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Sponsor's Phone No:</span></td>
@@ -297,14 +297,14 @@
 				</tr>
 				<tr>
 					<td class="longInput"><span class="print_label">Sponsor's Occupation:</span></td>
-					<td class="longInput"><span>{{ Expand::uc($parent->sponsor_occupation) }}</span></td>
+					<td class="longInput"><span>{{ Str::title($parent->sponsor_occupation) }}</span></td>
 				</tr>
 				</tbody>
 		</table>
 		<div class="formHeading">
 			<p>D - DECLARATION</p>
 		</div>
-		<p style="font-size: 1.2em; line-height: 32px;">In seeking for admission to <strong>Bingham University</strong>, I {{ '<strong>' . Expand::upp($biodata->firstname . ' ' .$biodata->othernames . ' ' . $biodata->surname) . '</strong>' }} voluntarily agree as a student, to uphold the ideals, standards and regulations set forth by the University and to respect the principles and traditions it upholds as an <strong>ECWA</strong> institution of higher learning. I also agree while no information requested in this form is sufficient in itself to deny admission, any false declaration will be enough ground for my summary dismissal.
+		<p style="font-size: 1.2em; line-height: 32px;">In seeking for admission to <strong>Bingham University</strong>, I {{ '<strong>' . Str::upper($biodata->firstname . ' ' .$biodata->othernames . ' ' . $biodata->surname) . '</strong>' }} voluntarily agree as a student, to uphold the ideals, standards and regulations set forth by the University and to respect the principles and traditions it upholds as an <strong>ECWA</strong> institution of higher learning. I also agree while no information requested in this form is sufficient in itself to deny admission, any false declaration will be enough ground for my summary dismissal.
 		<br />
 		<br />
 		<strong>Date:</strong>___________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Signature:</strong>__________________________
