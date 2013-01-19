@@ -45,19 +45,19 @@
                 <fieldset>
 
                     <p>
-                        {{ Form::label('current_password','Current Password:') }}
+                        <label for="current_password">Current Password: <span class="requiredField">*</span></label>
                         {{ Form::mpassword('current_password', Input::old('current_password'), array('class'=>'inputStyle')) }}
                         {{ $errors->first('current_password','<em class="emsg">:message</em>') }}
                     </p>
 
                     <p>
-                        {{ Form::label('password','New Password:') }}
+                        <label for="password">New Password: <span class="requiredField">*</span></label>
                         {{ Form::mpassword('password', Input::old('password'), array('class'=>'inputStyle')) }}
                         {{ $errors->first('password','<em class="emsg">:message</em>') }}
                     </p>
 
                     <p>
-                        {{ Form::label('password_confirmation','Confirm Password:') }}
+                        <label for="password_confirmation">Confirm Password: <span class="requiredField">*</span></label>
                         {{ Form::mpassword('password_confirmation', Input::old('password_confirmation'), array('class'=>'inputStyle')) }}
                         {{ $errors->first('password_confirmation','<em class="emsg">:message</em>') }}
                     </p>
