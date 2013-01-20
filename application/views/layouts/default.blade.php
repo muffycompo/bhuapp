@@ -26,7 +26,7 @@
 			{{ HTML::image('/img/logo.png','Logo',array('class'=>'fl')) }}
 			<ul id="nav" class="fr">
 				<li>{{ HTML::link('http://www.binghamuni.edu.ng','University Website', array('title'=> 'Bingham University Website','target'=>'_blank')) }}</li>
-				<li>{{ HTML::link('#','Registration Guide', array('title' => 'Guide to Registration')) }}</li>
+				<li>{{ HTML::link_to_route('docs','Registration Guide', '', array('title' => 'Guide to Registration')) }}</li>
 			</ul>
 		</div>
 
@@ -34,7 +34,7 @@
 
 	<div id="mainContent" class="container">
 		<!-- Yield sections from Views -->
-		@yield('content');
+		@yield('content')
 	</div><!-- end mainContent -->
 	
 	<div id="footer">

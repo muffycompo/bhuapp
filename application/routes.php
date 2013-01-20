@@ -54,12 +54,14 @@ Route::get('/users/edit_result/(:num)/(:num)', array('as'=>'edit_result','uses'=
 Route::get('/users/delete_institution/(:num)/(:num)', array('as'=>'delete_institution','uses'=>'users@delete_institution'));
 Route::get('/users/delete_result/(:num)/(:num)', array('as'=>'delete_result','uses'=>'users@delete_result'));
 Route::get('/users/print_form', array('as'=>'print_form','uses'=>'users@print_form'));
+Route::get('/home/documentation', array('as'=>'docs','uses'=>'home@documentation'));
 
 // Form Download Routes
 Route::get('forms/confidential_report', array('as'=>'confidential_report', 'uses'=>'forms@confidential_report'));
 Route::get('forms/character_assessment_form', array('as'=>'character_assessment_form', 'uses'=>'forms@character_assessment_form'));
 Route::get('forms/utme_de_assessment_form', array('as'=>'utme_de_assessment_form', 'uses'=>'forms@utme_de_assessment_form'));
 Route::get('forms/guidance_councelling_report', array('as'=>'guidance_councelling_report', 'uses'=>'forms@guidance_councelling_report'));
+Route::get('home/registration_guide', array('as'=>'registration_guide', 'uses'=>'home@registration_guide'));
 
 // POST Routes
 Route::post('/users/login', array('uses'=>'users@login'));
