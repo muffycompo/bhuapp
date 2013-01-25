@@ -23,7 +23,6 @@
 				<h2 class="form">Documentation</h2>
 				<ul id="form-sections">
 					<li>{{ HTML::link_to_route('registration_guide','Registration Guide (PDF)', '', array('target'=>'_blank')) }}</li>
-					<li>{{ HTML::link('http://www.youtube.com/user/mfawaalfred','Registration Guide (Video)', array('target'=>'_blank')) }}</li>
 				</ul>
 			</div><!-- end downloadable-forms -->
 
@@ -37,6 +36,12 @@
 					@endif
 				</ul>
 			</div><!-- end downloadable-forms -->
+			
+			<!-- Embed Youtube Video Documentation -->
+			<div class="full_grid">
+				<br />
+				<iframe width="800" height="450" src="http://www.youtube.com/embed/qFXsEF_Z_Dw?rel=0" frameborder="0" allowfullscreen></iframe>
+			</div>
 
 		</div><!-- end main-dashboard -->
 
