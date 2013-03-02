@@ -60,7 +60,7 @@ Route::get('/home/documentation', array('as'=>'docs','uses'=>'home@documentation
 Route::get('forms/confidential_report', array('as'=>'confidential_report', 'uses'=>'forms@confidential_report'));
 Route::get('forms/character_assessment_form', array('as'=>'character_assessment_form', 'uses'=>'forms@character_assessment_form'));
 Route::get('forms/utme_de_assessment_form', array('as'=>'utme_de_assessment_form', 'uses'=>'forms@utme_de_assessment_form'));
-Route::get('forms/guidance_councelling_report', array('as'=>'guidance_councelling_report', 'uses'=>'forms@guidance_councelling_report'));
+Route::get('forms/guidance_counselling_report', array('as'=>'guidance_counselling_report', 'uses'=>'forms@guidance_counselling_report'));
 Route::get('home/registration_guide', array('as'=>'registration_guide', 'uses'=>'home@registration_guide'));
 
 // POST Routes

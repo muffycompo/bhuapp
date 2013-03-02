@@ -19,8 +19,8 @@ class Forms_Controller extends Base_Controller {
 		return Response::download(path('public') . DS . '/forms/UTME_DE_ASSESSMENT_FORM.pdf', 'UTME_DE_ASSESSMENT_FORM');
 	}
 
-	public function get_guidance_councelling_report(){
-		return Response::download(path('public') . DS . '/forms/GUIDANCE_COUNCELLING_FORM.pdf', 'GUIDANCE_COUNCELLING_FORM');
+	public function get_guidance_counselling_report(){
+		return Response::download(path('public') . DS . '/forms/GUIDANCE_COUNSELLING_FORM.pdf', 'GUIDANCE_COUNCELLING_FORM');
 	}
 
 

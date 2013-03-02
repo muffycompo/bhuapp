@@ -223,7 +223,8 @@ class Bhu {
 
     public static function form_completion(){
         $user_id = Session::get('user_id');
-        $form = DB::table('statuses')->where('user_id', '=', $user_id)->first()->form_completion;
+        if(empty($user_id)){ return null;}
+        $form = DB::table('statuses')->where('user_id', '=', (int) $user_id)->first()->form_completion;
         return $form;
     }
 
