@@ -23,5 +23,4 @@ class Forms_Controller extends Base_Controller {
 		return Response::download(path('public') . DS . '/forms/GUIDANCE_COUNSELLING_FORM.pdf', 'GUIDANCE_COUNCELLING_FORM');
 	}
 
-
 }

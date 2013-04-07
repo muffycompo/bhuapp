@@ -27,12 +27,18 @@ class Institution extends Basemodel{
 			'to_year' => $data['to'],
 			'qualification' => $data['qualification']
 		);
-		if(self::check_institution_quota($user_id)){
-			static::create($institution_data);
-			return true;
-		} else {
-			return false;
-		}
+
+        if(self::check_institution_exists($user_id,$data['institution'],$data['from'],$data['to'],$data['qualification']) === false ){
+            if(self::check_institution_quota($user_id)){
+                static::create($institution_data);
+                return true;
+            } else {
+                return 2;
+            }
+        } else {
+            return 1;
+        }
+
 			
 	}
 
@@ -68,7 +74,15 @@ class Institution extends Basemodel{
 		$count = DB::table('institutions')->where('user_id','=',$user_id)->count();
 		if($count >= 4){return false;} else { return true;}
 	}
-	
 
+    protected static function check_institution_exists($user_id, $institution_name, $from_year, $to_year, $qualification){
+        $count = DB::table('institutions')->where('user_id','=',$user_id)
+            ->where('institution_name','=',$institution_name)
+            ->where('from_year','=',$from_year)
+            ->where('to_year','=',$to_year)
+            ->where('qualification','=',$qualification)
+            ->count();
+        if($count > 0){return true;} else { return false;}
+    }
 
 }

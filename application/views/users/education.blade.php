@@ -78,7 +78,7 @@
 
 			<p>
 				{{ Form::label('jamb_score','JAMB Score:') }}
-				{{ Form::text('jamb_score', (!empty($education_data->jamb_score))? $education_data->jamb_score : Input::old('jamb_score'), array('id'=>'jamb_score','class'=>'inputStyle')) }}
+				{{ Form::text('jamb_score', (!empty($education_data->jamb_score))? $education_data->jamb_score : Input::old('jamb_score'), array('id'=>'jamb_score','class'=>'inputStyle','maxlength'=>'3')) }}
 				{{ $errors->first('jamb_score','<em class="emsg">:message</em>') }}
 			</p>
 

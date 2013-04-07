@@ -197,10 +197,14 @@ class Users_Controller extends Base_Controller{
 	public function post_add_institution(){
 		$validate = Institution::institution_validation(Input::all());
 		if($validate === true){
-			if(Institution::create_institution(Bhu::trim_it(Input::all()))){
+            $institition = Institution::create_institution(Bhu::trim_it(Input::all()));
+			if(  $institition === true ){
 				return Redirect::back()
 					->with('message', User::message_response('success', 'Institution has been added!'))->with_input();
-			} else {
+			} else if( $institition == 1 ) {
+                return Redirect::back()
+                    ->with('message', User::message_response('error', 'You have already added this institution!'))->with_input();
+            } else {
 				return Redirect::back()
 					->with('message', User::message_response('error', 'You already have four(4) Institutions added!'))->with_input();
 			}
@@ -217,9 +221,13 @@ class Users_Controller extends Base_Controller{
 	public function post_add_result(){
 		$validate = Examination::examination_validation(Input::all());
 		if($validate === true){
-			if(Examination::create_examination(Bhu::trim_it(Input::all()))){
+            $result = Examination::create_examination(Bhu::trim_it(Input::all()));
+			if ( $result === true ){
 				return Redirect::back()
 					->with('message', User::message_response('success', 'Result has been added!'))->with_input();
+			} else if( $result == 1 ) {
+				return Redirect::back()
+					->with('message', User::message_response('error', 'You have already added this result!'))->with_input();
 			} else {
 				return Redirect::back()
 					->with('message', User::message_response('error', 'You already have eighteen(18) results added!'))->with_input();

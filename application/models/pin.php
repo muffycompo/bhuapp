@@ -10,4 +10,6 @@ class Pin extends Basemodel{
 			'pin_status' => 1
 		));
 	}
+
+
 }

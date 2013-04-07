@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Bingham University - v1.1.0 beta</title>
+    <title>Bingham University - Applicant Portal</title>
     <meta name="description" content="Bingham University Applicant Registration Portal">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="{{ URL::to('favicon.ico') }}" type="image/x-icon" />

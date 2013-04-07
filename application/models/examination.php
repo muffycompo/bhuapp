@@ -26,15 +26,18 @@ class Examination extends Basemodel{
 			'exam_subject_id' => $data['exam_subject'],
 			'exam_grade_id' => $data['exam_grade']
 		);
-		if(self::check_examination_quota($user_id)){
-			static::create($examination_data);
-			return true;
-		} else {
-			return false;
-		}
-			
-	}
+        if(self::check_result_exists($data['exam_type'], $data['exam_subject'], $data['exam_number']) === false){
+            if(self::check_examination_quota($user_id)){
+                static::create($examination_data);
+                return true;
+            } else {
+                return 2;
+            }
+        } else {
+            return 1;
+        }
 
+	}
 
 	public static function update_examination($data){
 		$id = $data['id'];
@@ -69,6 +72,14 @@ class Examination extends Basemodel{
 		$count = DB::table('examinations')->where('user_id','=',$user_id)->count();
 		if($count >= 18){return false;} else { return true;}
 	}
+
+    protected static function check_result_exists($exam_type, $exam_subject, $exam_number){
+        $count = DB::table('examinations')->where('exam_type_id','=',$exam_type)
+                ->where('exam_subject_id','=',$exam_subject)
+                ->where('exam_number','=',$exam_number)
+                ->count();
+        if($count > 0){return true;} else { return false;}
+    }
 	
 
 
