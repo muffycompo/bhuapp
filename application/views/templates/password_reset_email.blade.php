@@ -400,6 +400,7 @@
                                                                 You have requested for a password reset and below is the newly generated password:
                                                                 <br />
                                                                 <br />
+                                                                Username: <strong>{{ $username }}</strong><br />
                                                                 Password: <strong>{{ $password }}</strong>
                                                                 <br />
                                                                 Applicant Portal URL: <strong><a href="http://www.binghamuni.edu.ng/admission" target="_blank">http://www.binghamuni.edu.ng/admission</a></strong>

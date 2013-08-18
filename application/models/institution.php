@@ -83,6 +83,7 @@ class Institution extends Basemodel{
             ->where('qualification','=',$qualification)
             ->count();
         if($count > 0){return true;} else { return false;}
+
     }
 
 }

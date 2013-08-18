@@ -395,6 +395,7 @@ class Users_Controller extends Base_Controller{
 		if($validate === true){
 			$user = User::reset_password(Bhu::trim_it(Input::all()));
 			if($user !== false){
+                $user['username'] = Input::get('username');
 				// Send Reset Email
 				User::password_reset_email($user);
                 // Send SMS

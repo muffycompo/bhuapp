@@ -257,7 +257,8 @@ class Bhu {
                 ->with('name',$data['surname'] . ' ' . $data['firstname'])
                 ->with('email',$data['email'])
                 ->with('gsm_no',$data['gsm_no'])
-                ->with('password',$data['password']);
+                ->with('password',$data['password'])
+                ->with('username',$data['username']);
         return $email;
     }
 
@@ -269,7 +270,7 @@ class Bhu {
     }
 
     public static function reset_password_sms($data){
-        $txt = 'Hello ' .$data['firstname']. ' ' .$data['surname']. ', your password has been reset to: ' . $data['password'];
+        $txt = 'Hello ' .$data['firstname']. ' ' .$data['surname']. ', your Username is: ' . $data['username'] . ' and password has been reset to: ' . $data['password'];
         $receiver = $data['gsm_no'];
         // Call SMS bundle
         Sms::send($txt, $receiver);
